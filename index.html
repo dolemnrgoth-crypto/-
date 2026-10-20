@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#F2F2F7">
+  <title>รายงานผลการศึกษา • สกร.ระดับอำเภอเมืองนครราชสีมา</title>
+  <link rel="icon" type="image/png" href="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png">
+  <link rel="apple-touch-icon" href="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Sarabun -->
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ios-bg: #F2F2F7;
+      --ios-blue: #007AFF;
+      --ios-green: #34C759;
+      --ios-orange: #FF9500;
+      --ios-red: #FF3B30;
+      --ios-text: #1C1C1E;
+      --ios-subtext: #8E8E93;
+    }
+    * {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Sarabun', sans-serif;
+      background-color: var(--ios-bg);
+      color: var(--ios-text);
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .ios-mesh-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(at 10% 10%, rgba(0, 122, 255, 0.09) 0px, transparent 55%),
+        radial-gradient(at 90% 15%, rgba(88, 86, 214, 0.08) 0px, transparent 55%),
+        radial-gradient(at 50% 90%, rgba(52, 199, 89, 0.06) 0px, transparent 60%),
+        #F2F2F7;
+    }
+    .ios-glass {
+      background: rgba(255, 255, 255, 0.80);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.88);
+      box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+    .ios-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.98);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.035);
+    }
+    /* ป้องกัน iOS Safari ซูมหน้าจออัตโนมัติเวลาแตะ input ด้วยการกำหนด font-size >= 16px */
+    .ios-input {
+      font-size: 16px !important;
+      background: rgba(118, 118, 128, 0.09);
+      border: 1px solid transparent;
+      transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .ios-input:focus {
+      background: #FFFFFF;
+      border-color: rgba(0, 122, 255, 0.45);
+      box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.12);
+    }
+    .ios-btn-primary {
+      background: #007AFF;
+      color: #FFFFFF;
+      box-shadow: 0 6px 20px -4px rgba(0, 122, 255, 0.38);
+      transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .ios-btn-primary:hover { background: #006EE6; }
+    .ios-btn-primary:active { transform: scale(0.97); }
+
+    /* ปุ่มตัวเลขกลมแบบหน้าจอล็อก iOS 18 รองรับนิ้วโป้งบนมือถือ */
+    .ios-numpad-btn {
+      width: 4.4rem;
+      height: 4.4rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.035);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s ease, background-color 0.15s ease;
+      user-select: none;
+    }
+    .ios-numpad-btn:active {
+      background: rgba(209, 209, 214, 0.75);
+      transform: scale(0.92);
+    }
+
+    .ios-spring-enter {
+      animation: iosSpring 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes iosSpring {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes iosSheetUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .sheet-enter {
+      animation: iosSheetUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes iosShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-9px); }
+      40%, 80% { transform: translateX(9px); }
+    }
+    .shake-anim { animation: iosShake 0.35s ease-in-out; }
+
+    /* Safe Area สำหรับมือถือ iPhone ที่มีแถบ Home Indicator ด้านล่าง */
+    .pb-safe {
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    /* ===================================================================== */
+    /* สไตล์เฉพาะสำหรับการสั่งพิมพ์ใบรายงานผลการศึกษา (1 หน้า A4 เป๊ะตามต้นฉบับ) */
+    /* ===================================================================== */
+    #print-transcript { display: none; }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 8mm 10mm 8mm 10mm;
+      }
+      html, body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-family: 'Sarabun', sans-serif !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100% !important;
+        overflow: hidden !important;
+      }
+      .no-print, #screen-search, #screen-profile, #modal-pin {
+        display: none !important;
+      }
+      #print-transcript {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 278mm;
+        box-sizing: border-box;
+        padding: 2mm 4mm;
+        color: #000;
+        font-size: 13.5px;
+        line-height: 1.45;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ios-mesh-bg no-print"></div>
+
+  <!-- ===================================================================== -->
+  <!-- หน้าที่ 1: หน้าจอค้นหาตัวตน (รองรับทั้งมือถือและคอมพิวเตอร์)               -->
+  <!-- ===================================================================== -->
+  <main id="screen-search" class="min-h-[100dvh] flex flex-col justify-center items-center px-4 py-8">
+    <div class="w-full max-w-[390px] ios-spring-enter">
+
+      <div class="text-center mb-6">
+        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-[24px] bg-white p-2.5 flex items-center justify-center mx-auto mb-3.5 shadow-[0_10px_28px_rgba(0,0,0,0.06)] border border-white">
+          <img
+            src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
+            alt="โลโก้ สกร.นม"
+            class="w-full h-full object-contain"
+          >
+        </div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/85 text-[#007AFF] text-[11px] font-semibold shadow-sm border border-white mb-2">
+          <span>🔒 ข้อมูลส่วนบุคคล • ยืนยันด้วย PIN</span>
+        </div>
+        <h1 class="text-[22px] sm:text-2xl font-bold text-[#1C1C1E] tracking-tight">
+          ตรวจสอบผลการเรียน
+        </h1>
+        <p class="text-[13px] font-medium text-[#3A3A3C] mt-0.5">
+          ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอเมืองนครราชสีมา
+        </p>
+        <p class="text-xs text-[#8E8E93] mt-0.5">
+          หลักสูตร ปวช. • ภาคเรียนที่ 2 ปีการศึกษา 2568
+        </p>
+      </div>
+
+      <div class="ios-glass rounded-[30px] p-5 sm:p-7">
+        <form onsubmit="initiateSearch(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-[#8E8E93] mb-1.5 pl-1">
+              รหัสประจำตัวนักศึกษา หรือ ชื่อ-นามสกุล
+            </label>
+            <div class="relative">
+              <input
+                type="text"
+                id="searchKeyInput"
+                required
+                autocomplete="off"
+                placeholder="เช่น 67130492208 หรือ ปัณณธร"
+                class="ios-input w-full pl-10 pr-4 py-3.5 rounded-2xl focus:outline-none font-medium text-[#1C1C1E] placeholder:text-[#8E8E93] placeholder:font-normal"
+              >
+              <svg class="w-4 h-4 text-[#8E8E93] absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div id="searchErrorBox" class="hidden px-3.5 py-2.5 rounded-2xl bg-[#FF3B30]/10 text-[#FF3B30] text-xs font-medium flex items-center gap-2">
+            <span>⚠️</span>
+            <span>ไม่พบข้อมูลนักศึกษา กรุณาตรวจสอบอีกครั้ง</span>
+          </div>
+
+          <button
+            type="submit"
+            class="ios-btn-primary w-full font-semibold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-1.5 text-[15px]"
+          >
+            <span>ค้นหาข้อมูล</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </form>
+
+        <div class="mt-5 pt-4 border-t border-black/[0.06] text-center">
+          <p class="text-xs text-[#8E8E93]">
+            รหัส PIN ใช้ <span class="text-[#1C1C1E] font-semibold">เลข 4 ตัวท้ายของรหัสนักศึกษา</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- หน้าต่างยืนยันรหัสผ่าน 4 หลัก (Bottom Sheet บนมือถือ / Modal บนคอม)       -->
+  <!-- ===================================================================== -->
+  <div id="modal-pin" class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center bg-black/30 backdrop-blur-md sm:p-4">
+    <div id="pinModalCard" class="ios-glass rounded-t-[34px] sm:rounded-[36px] px-6 pt-4 pb-8 sm:py-7 w-full max-w-[380px] text-center relative sheet-enter pb-safe">
+
+      <!-- แถบจับด้านบนสไตล์ iOS Bottom Sheet สำหรับมือถือ -->
+      <div class="w-10 h-1.5 bg-black/15 rounded-full mx-auto mb-3 sm:hidden"></div>
+
+      <button
+        onclick="closePinModal()"
+        class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/[0.06] active:bg-black/[0.15] text-[#3A3A3C] flex items-center justify-center text-xs font-bold transition"
+      >
+        ✕
+      </button>
+
+      <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white p-1.5 flex items-center justify-center mx-auto mb-2.5 shadow-sm border border-black/[0.04]">
+        <img
+          src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
+          alt="โลโก้ สกร.นม"
+          class="w-full h-full object-contain"
+        >
+      </div>
+
+      <h3 class="text-base font-bold text-[#1C1C1E]">ป้อนรหัส PIN 4 หลัก</h3>
+      <p id="pinTargetName" class="text-xs font-semibold text-[#007AFF] mt-0.5 truncate px-4"></p>
+      <p class="text-[11px] text-[#8E8E93] mt-0.5">กดเลข 4 ตัวท้ายของรหัสประจำตัวนักศึกษา</p>
+
+      <!-- จุดวงกลมแสดงสถานะ PIN -->
+      <div id="pinDotsContainer" class="flex justify-center gap-4 my-5">
+        <div class="pin-dot w-3.5 h-3.5 rounded-full border-[1.8px] border-[#8E8E93] transition-all duration-150"></div>
+        <div class="pin-dot w-3.5 h-3.5 rounded-full border-[1.8px] border-[#8E8E93] transition-all duration-150"></div>
+        <div class="pin-dot w-3.5 h-3.5 rounded-full border-[1.8px] border-[#8E8E93] transition-all duration-150"></div>
+        <div class="pin-dot w-3.5 h-3.5 rounded-full border-[1.8px] border-[#8E8E93] transition-all duration-150"></div>
+      </div>
+
+      <p id="pinErrorMsg" class="hidden text-xs font-semibold text-[#FF3B30] -mt-2 mb-3">
+        รหัส PIN ไม่ถูกต้อง ลองอีกครั้ง
+      </p>
+
+      <!-- แป้นตัวเลขสำหรับนิ้วสัมผัส -->
+      <div class="grid grid-cols-3 gap-x-5 gap-y-3 justify-items-center max-w-[250px] mx-auto">
+        <button type="button" onclick="pressPin('1')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">1</span></button>
+        <button type="button" onclick="pressPin('2')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">2</span></button>
+        <button type="button" onclick="pressPin('3')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">3</span></button>
+        <button type="button" onclick="pressPin('4')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">4</span></button>
+        <button type="button" onclick="pressPin('5')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">5</span></button>
+        <button type="button" onclick="pressPin('6')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">6</span></button>
+        <button type="button" onclick="pressPin('7')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">7</span></button>
+        <button type="button" onclick="pressPin('8')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">8</span></button>
+        <button type="button" onclick="pressPin('9')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">9</span></button>
+        <button type="button" onclick="clearPin()" class="w-16 h-16 flex items-center justify-center text-xs font-semibold text-[#8E8E93] active:text-[#1C1C1E] transition">ล้าง</button>
+        <button type="button" onclick="pressPin('0')" class="ios-numpad-btn"><span class="text-2xl font-semibold text-[#1C1C1E] leading-none">0</span></button>
+        <button type="button" onclick="backspacePin()" class="w-16 h-16 flex items-center justify-center text-xl font-medium text-[#3A3A3C] active:text-[#1C1C1E] transition">⌫</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- หน้าที่ 2: หน้าข้อมูลส่วนบุคคลและผลการเรียน (Responsive Mobile + Desktop) -->
+  <!-- ===================================================================== -->
+  <section id="screen-profile" class="hidden min-h-[100dvh] pb-28 sm:pb-16 no-print">
+
+    <!-- iOS 18 Translucent Top Navigation Bar -->
+    <nav class="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-black/[0.06]">
+      <div class="max-w-4xl mx-auto px-3.5 sm:px-4 py-3 flex items-center justify-between gap-2">
+        <button
+          onclick="logoutToSearch()"
+          class="inline-flex items-center gap-0.5 text-[#007AFF] active:opacity-60 font-semibold text-sm transition shrink-0"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+          </svg>
+          <span>กลับ</span>
+        </button>
+
+        <div class="flex items-center gap-1.5 min-w-0">
+          <img
+            src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
+            alt="โลโก้ สกร.นม"
+            class="w-5 h-5 sm:w-6 sm:h-6 object-contain shrink-0"
+          >
+          <span class="text-xs sm:text-sm font-bold text-[#1C1C1E] truncate">รายงานผลการศึกษา</span>
+        </div>
+
+        <button
+          onclick="triggerOfficialPrint()"
+          class="px-3 sm:px-4 py-1.5 rounded-full bg-[#007AFF] active:bg-[#006EE6] text-white text-xs font-semibold shadow-sm transition flex items-center gap-1 shrink-0"
+        >
+          <span>🖨️</span>
+          <span class="hidden sm:inline">พิมพ์รายงานผล (A4)</span>
+          <span class="sm:hidden">พิมพ์</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- เนื้อหาหลักสไตล์ iOS 18 Grouped Bento -->
+    <div class="max-w-4xl mx-auto px-3.5 sm:px-4 mt-4 sm:mt-6 ios-spring-enter space-y-4 sm:space-y-5">
+
+      <!-- Bento Grid: ข้อมูลนักศึกษา + เกรดเฉลี่ย -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-4">
+
+        <!-- การ์ดข้อมูลนักศึกษา (7 คอลัมน์บนคอม / เต็มจอบนมือถือ) -->
+        <div class="md:col-span-7 ios-card rounded-[24px] sm:rounded-[28px] p-4 sm:p-6 flex flex-col justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[18px] bg-[#F2F2F7] p-2 flex items-center justify-center shrink-0 border border-black/[0.04]">
+              <img
+                src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
+                alt="โลโก้ สกร.นม"
+                class="w-full h-full object-contain"
+              >
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-1.5 mb-1">
+                <span id="pStatusBadge" class="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold"></span>
+              </div>
+              <h2 id="pFullName" class="text-lg sm:text-2xl font-bold text-[#1C1C1E] leading-snug break-words"></h2>
+              <p class="text-[11px] sm:text-xs text-[#8E8E93] mt-0.5">สาขาวิชาคอมพิวเตอร์ธุรกิจ • พาณิชยกรรม</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 mt-4 pt-3.5 border-t border-black/[0.05]">
+            <div class="bg-[#F2F2F7]/85 rounded-2xl p-2.5 sm:p-3">
+              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] block">รหัสนักศึกษา</span>
+              <span id="pStudentId" class="font-mono font-bold text-[#1C1C1E] text-[11px] sm:text-sm mt-0.5 block break-all"></span>
+            </div>
+            <div class="bg-[#F2F2F7]/85 rounded-2xl p-2.5 sm:p-3">
+              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] block">ชั้นปี / กลุ่ม</span>
+              <span id="pClassGroup" class="font-bold text-[#007AFF] text-[11px] sm:text-sm mt-0.5 block"></span>
+            </div>
+            <div class="bg-[#F2F2F7]/85 rounded-2xl p-2.5 sm:p-3">
+              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] block">ภาคเรียน</span>
+              <span class="font-bold text-[#1C1C1E] text-[11px] sm:text-sm mt-0.5 block">2 / 2568</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- การ์ด Widget GPA (5 คอลัมน์บนคอม / เต็มจอบนมือถือ) -->
+        <div class="md:col-span-5 ios-card rounded-[24px] sm:rounded-[28px] p-4 sm:p-6 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-[#8E8E93]">เกรดเฉลี่ยประจำภาค (GPA)</span>
+            <span id="pTermCreditsBadge" class="px-2.5 py-0.5 rounded-full bg-[#007AFF]/10 text-[#007AFF] text-[11px] font-semibold"></span>
+          </div>
+
+          <div class="my-2.5 sm:my-3 flex items-center justify-between">
+            <div>
+              <div id="pGpaValue" class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1C1C1E]"></div>
+              <div id="pAvgScore" class="text-[11px] sm:text-xs text-[#8E8E93] mt-0.5"></div>
+            </div>
+            <div class="text-right">
+              <div class="text-[11px] text-[#8E8E93]">หน่วยกิตสะสม</div>
+              <div id="pCumCreditsMobile" class="text-base sm:text-lg font-bold text-[#007AFF]"></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 pt-3 border-t border-black/[0.05] text-center">
+            <div class="bg-[#F2F2F7]/85 rounded-2xl py-2 px-1">
+              <span class="text-[10px] text-[#8E8E93] block">ลงทะเบียน</span>
+              <span id="pCountTotal" class="font-bold text-xs sm:text-sm text-[#1C1C1E]"></span>
+            </div>
+            <div class="bg-[#34C759]/10 rounded-2xl py-2 px-1">
+              <span class="text-[10px] text-[#248A3D] block">สอบผ่าน</span>
+              <span id="pCountPass" class="font-bold text-xs sm:text-sm text-[#248A3D]"></span>
+            </div>
+            <div class="bg-[#FF3B30]/10 rounded-2xl py-2 px-1">
+              <span class="text-[10px] text-[#D70015] block">ติด 0 / รอผล</span>
+              <span id="pCountFail" class="font-bold text-xs sm:text-sm text-[#D70015]"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ส่วนแสดงรายวิชา (แสดงเป็น Card List บนมือถือ และเป็น Table บนหน้าจอคอมพิวเตอร์) -->
+      <div class="ios-card rounded-[24px] sm:rounded-[28px] overflow-hidden">
+        <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-black/[0.05] flex items-center justify-between gap-2">
+          <div>
+            <h3 class="font-bold text-[#1C1C1E] text-sm sm:text-[15px]">รายวิชาประจำภาคเรียนที่ 2/2568</h3>
+            <p class="text-[11px] sm:text-xs text-[#8E8E93]">แสดงรหัสวิชา หน่วยกิต (ท-ป-น) คะแนน และเกรด</p>
+          </div>
+          <span class="text-[11px] font-semibold text-[#007AFF] bg-[#007AFF]/10 px-2.5 py-1 rounded-full shrink-0">
+            ปวช.
+          </span>
+        </div>
+
+        <!-- 1. มุมมองสำหรับมือถือ (Mobile iOS Inset Grouped List: ซ่อนบนจอคอม sm ขึ้นไป) -->
+        <div id="pMobileSubjectList" class="sm:hidden divide-y divide-black/[0.05]"></div>
+
+        <!-- 2. มุมมองสำหรับจอแท็บเล็ตและคอมพิวเตอร์ (Desktop Table: ซ่อนบนมือถือ) -->
+        <div class="hidden sm:block overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-[#F2F2F7]/70 text-[#8E8E93] text-[11px] font-semibold uppercase border-b border-black/[0.05]">
+              <tr>
+                <th class="py-3 px-4 w-28">รหัสวิชา</th>
+                <th class="py-3 px-4">ชื่อวิชา</th>
+                <th class="py-3 px-4 w-28 text-center">หน่วยกิต</th>
+                <th class="py-3 px-4 w-28 text-center">คะแนน (100)</th>
+                <th class="py-3 px-4 w-24 text-center">เกรด</th>
+              </tr>
+            </thead>
+            <tbody id="pSubjectTableBody" class="divide-y divide-black/[0.04]"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- แถบปุ่มลอยด้านล่างสำหรับมือถือ (Mobile Floating Bottom Bar) -->
+    <div class="sm:hidden fixed bottom-0 inset-x-0 z-30 bg-white/85 backdrop-blur-xl border-t border-black/[0.06] px-4 pt-2.5 pb-safe flex items-center gap-2.5">
+      <button
+        onclick="logoutToSearch()"
+        class="px-4 py-3 rounded-2xl bg-[#F2F2F7] active:bg-[#E5E5EA] text-[#1C1C1E] font-semibold text-xs shrink-0"
+      >
+        ค้นหาใหม่
+      </button>
+      <button
+        onclick="triggerOfficialPrint()"
+        class="flex-1 ios-btn-primary py-3 px-4 rounded-2xl font-semibold text-xs flex items-center justify-center gap-1.5"
+      >
+        <span>🖨️ พิมพ์ใบรายงานผลการศึกษา (A4)</span>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- ส่วนสำหรับสั่งพิมพ์ (Official A4 Single-Page Transcript ตามไฟล์ PDF)     -->
+  <!-- ===================================================================== -->
+  <div id="print-transcript">
+    <div>
+      <!-- Header: โลโก้ซ้าย + ชื่อสถานศึกษาตรงกลาง -->
+      <div class="relative flex items-start justify-center pt-1 pb-3">
+        <img
+          src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
+          alt="โลโก้ สกร.นม"
+          class="w-[68px] h-[68px] object-contain absolute left-0 top-0"
+        >
+        <div class="text-center">
+          <div class="text-[18px] font-bold tracking-normal leading-snug">
+            ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอเมืองนครราชสีมา
+          </div>
+          <div class="text-[14px] font-normal leading-snug mt-0.5">
+            - &nbsp;ต. หัวทะเล อ. เมืองนครราชสีมา จ. นครราชสีมา 30000
+          </div>
+          <div class="text-[16px] font-bold leading-snug mt-1">
+            รายงานผลการศึกษา
+          </div>
+        </div>
+      </div>
+
+      <!-- ข้อมูลนักศึกษา 2 คอลัมน์ -->
+      <div class="grid grid-cols-12 text-[14px] leading-[1.6] mt-2 mb-3">
+        <div class="col-span-6 pr-2">
+          <div class="flex">
+            <div class="w-[140px] text-right pr-2">รหัสนักศึกษา :</div>
+            <div id="prStudentId" class="font-bold"></div>
+          </div>
+          <div class="flex">
+            <div class="w-[140px] text-right pr-2">รหัสกลุ่มเรียน :</div>
+            <div id="prGroupCode"></div>
+          </div>
+          <div class="flex">
+            <div class="w-[140px] text-right pr-2">ชั้นปี :</div>
+            <div id="prYearLevel"></div>
+          </div>
+          <div class="flex">
+            <div class="w-[140px] text-right pr-2">ประเภทนักศึกษา :</div>
+            <div>ปกติ</div>
+          </div>
+          <div class="flex">
+            <div class="w-[140px] text-right pr-2">สถานะนักศึกษา :</div>
+            <div>กำลังศึกษา</div>
+          </div>
+        </div>
+
+        <div class="col-span-6 pl-2">
+          <div class="flex">
+            <div class="w-[85px] text-left">ชื่อ - สกุล</div>
+            <div class="w-[14px] text-center">:</div>
+            <div id="prFullName" class="font-bold"></div>
+          </div>
+          <div class="flex">
+            <div class="w-[85px] text-left">กลุ่มเรียน</div>
+            <div class="w-[14px] text-center">:</div>
+            <div id="prShortGroup"></div>
+          </div>
+          <div class="flex">
+            <div class="w-[85px] text-left">ประเภทวิชา</div>
+            <div class="w-[14px] text-center">:</div>
+            <div>พาณิชยกรรม</div>
+          </div>
+          <div class="flex">
+            <div class="w-[85px] text-left">สาขาวิชา</div>
+            <div class="w-[14px] text-center">:</div>
+            <div>คอมพิวเตอร์ธุรกิจ</div>
+          </div>
+          <div class="flex">
+            <div class="w-[85px] text-left">สาขางาน</div>
+            <div class="w-[14px] text-center">:</div>
+            <div>คอมพิวเตอร์ธุรกิจ</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ตารางผลการเรียนตามแบบฟอร์มราชการ -->
+      <table class="w-full text-[13.5px] border-collapse">
+        <thead>
+          <tr class="border-t border-b border-black font-bold text-[13.5px]">
+            <th class="py-1.5 w-[95px] text-left pl-2">รหัสวิชา</th>
+            <th class="py-1.5 text-left pl-16">ชื่อวิชา</th>
+            <th class="py-1.5 w-[90px] text-center">หน่วยกิต</th>
+            <th class="py-1.5 w-[65px] text-center">เกรด</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pt-2 pb-1"></td>
+            <td class="pt-2 pb-1 font-bold text-[14px]">ภาคเรียนที่ &nbsp;2/2568</td>
+            <td class="pt-2 pb-1"></td>
+            <td class="pt-2 pb-1"></td>
+          </tr>
+        </tbody>
+        <tbody id="prCourseListBody"></tbody>
+        <tbody class="text-[13.5px]">
+          <tr>
+            <td colspan="2" class="pt-3 pb-0.5 pl-[135px]">
+              <span class="inline-block w-[115px] text-right pr-2">หน่วยกิตประจำภาค :</span>
+              <span id="prTermCredits"></span>
+            </td>
+            <td colspan="2" class="pt-3 pb-0.5">
+              <div class="flex justify-end pr-8">
+                <span class="text-right pr-2">เกรดเฉลี่ยประจำภาค :</span>
+                <span id="prTermGpa" class="w-[40px] text-left"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="py-0.5 pl-[135px]">
+              <span class="inline-block w-[115px] text-right pr-2">หน่วยกิตสะสม :</span>
+              <span id="prCumCredits"></span>
+            </td>
+            <td colspan="2" class="py-0.5">
+              <div class="flex justify-end pr-8">
+                <span class="text-right pr-2">เกรดเฉลี่ยสะสม :</span>
+                <span id="prCumGpa" class="w-[40px] text-left"></span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ส่วนท้ายกระดาษ (Footer ชิดขอบล่างของหน้า A4 เสมอ) -->
+    <div class="pt-2 border-t border-black text-[13px] flex items-center justify-between">
+      <div class="w-[180px]"></div>
+      <div class="flex items-center gap-3">
+        <span>1/1</span>
+        <span>นายทะเบียน.......................................................</span>
+      </div>
+      <div id="prFooterDateTime" class="w-[180px] text-right font-normal"></div>
+    </div>
+  </div>
+
+<script>
+// ============================================================================
+// 1. ข้อมูลหลักสูตร รหัสวิชา หน่วยกิต (ท-ป-น) และกิจกรรมตามโครงสร้าง สกร.
+// ============================================================================
+const PLAN_NAMES = ["แผน 1", "แผน 2", "แผน 3", "แผน 4", "แผน 5", "แผน 6"];
+
+const COURSE_METADATA_BY_PLAN = [
+  // แผน 1 (รวม 18 หน่วยกิต)
+  [
+    { code: "20000-1501", name: "หน้าที่พลเมืองและศีลธรรม", creditStr: "2-0-2", credit: 2 },
+    { code: "20000-1101", name: "ภาษาไทยพื้นฐาน", creditStr: "2-0-2", credit: 2 },
+    { code: "20204-2001", name: "ระบบปฏิบัติการเบื้องต้น", creditStr: "2-2-3", credit: 3 },
+    { code: "20001-2001", name: "คอมพิวเตอร์และสารสนเทศเพื่องานอาชีพ", creditStr: "1-2-2", credit: 2 },
+    { code: "20000-1301", name: "วิทยาศาสตร์เพื่อพัฒนาทักษะชีวิต", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-2108", name: "อินเตอร์เน็ตเพื่องานธุรกิจ", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-2002", name: "คอมพิวเตอร์และการบำรุงรักษา", creditStr: "1-2-2", credit: 2 },
+    { code: "20000-1102", name: "การพูดภาษาไทยในงานอาชีพ", creditStr: "0-2-1", credit: 1 },
+    { code: "20001-1001", name: "อาชีวอนามัยและความปลอดภัย", creditStr: "2-0-2", credit: 2 }
+  ],
+  // แผน 2 (รวม 18 หน่วยกิต -> สะสม 36 หน่วยกิต)
+  [
+    { code: "20000-1104", name: "ภาษาไทยเพื่ออาชีพ", creditStr: "0-2-1", credit: 1 },
+    { code: "20000-1202", name: "ภาษาอังกฤษ ฟัง-พูด", creditStr: "0-2-1", credit: 1 },
+    { code: "20000-1401", name: "คณิตศาสตร์พื้นฐานอาชีพ", creditStr: "2-0-2", credit: 2 },
+    { code: "20000-1503", name: "อาเซียนศึกษา", creditStr: "1-0-1", credit: 1 },
+    { code: "20000-1504", name: "ทักษะชีวิตและสังคม", creditStr: "1-0-1", credit: 1 },
+    { code: "20200-1001", name: "การขายเบื้องต้น", creditStr: "1-2-2", credit: 2 },
+    { code: "20200-1005", name: "เศรษฐศาสตร์เบื้องต้น", creditStr: "2-0-2", credit: 2 },
+    { code: "20204-2101", name: "โปรแกรมประมวลผลคำ", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-2105", name: "โปรแกรมกราฟิก", creditStr: "2-2-3", credit: 3 },
+    { code: "20000-1304", name: "โครงงานวิทยาศาสตร์", creditStr: "1-4-3", credit: 3 }
+  ],
+  // แผน 3 (รวม 19 หน่วยกิต -> สะสม 55 หน่วยกิต ตรงตามไฟล์ PDF ต้นฉบับทุกวิชา)
+  [
+    { code: "20000-1201", name: "ภาษาอังกฤษในชีวิตจริง", creditStr: "0-2-1", credit: 1 },
+    { code: "20000-1204", name: "การเขียนภาษาอังกฤษในชีวิตประจำวัน", creditStr: "0-2-1", credit: 1 },
+    { code: "20000-1603", name: "พลศึกษาเพื่อพัฒนาสุขภาพ", creditStr: "0-2-1", credit: 1 },
+    { code: "20200-1004", name: "พิมพ์ไทยเบื้องต้น", creditStr: "0-4-2", credit: 2 },
+    { code: "20200-1002", name: "การบัญชีเบื้องต้น", creditStr: "2-2-3", credit: 3 },
+    { code: "20204-2005", name: "เครือข่ายคอมพิวเตอร์เบื้องต้น", creditStr: "2-2-3", credit: 3 },
+    { code: "20204-2003", name: "คณิตศาสตร์คอมพิวเตอร์", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-2006", name: "องค์ประกอบศิลป์สำหรับงานคอมพิวเตอร์", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-2107", name: "การเขียนโปรแกรมภาษาคอมพิวเตอร์", creditStr: "2-2-3", credit: 3 },
+    { code: "20000-1602", name: "เพศวิถีศึกษา", creditStr: "1-0-1", credit: 1 }
+  ],
+  // แผน 4 (รวม 18 หน่วยกิต -> สะสม 73 หน่วยกิต)
+  [
+    { code: "20001-1002", name: "ธุรกิจและการเป็นผู้ประกอบการ", creditStr: "1-2-2", credit: 2 },
+    { code: "20200-1006", name: "พิมพ์ดีดอังกฤษเบื้องต้น", creditStr: "0-4-2", credit: 2 },
+    { code: "20000-1403", name: "สถิติการทดลอง", creditStr: "2-0-2", credit: 2 },
+    { code: "20204-2104", name: "โปรแกรมจัดการฐานข้อมูล", creditStr: "2-2-3", credit: 3 },
+    { code: "20000-1604", name: "ทักษะการดำรงชีวิตเพื่อสุขภาวะ", creditStr: "2-0-2", credit: 2 },
+    { code: "20200-1003", name: "กฎหมายพาณิชย์", creditStr: "2-0-2", credit: 2 },
+    { code: "20000-1210", name: "การอ่านสื่อสิ่งพิมพ์ภาษาอังกฤษ", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-2106", name: "การผลิตสื่อสิ่งพิมพ์", creditStr: "2-2-3", credit: 3 }
+  ],
+  // แผน 5 (รวม 15 หน่วยกิต -> สะสม 88 หน่วยกิต)
+  [
+    { code: "20000-1502", name: "ประวัติศาสตร์ชาติไทย", creditStr: "1-0-1", credit: 1 },
+    { code: "20204-2004", name: "หลักการเขียนโปรแกรม", creditStr: "2-2-3", credit: 3 },
+    { code: "20000-1505", name: "การพัฒนาคุณภาพชีวิต", creditStr: "2-0-2", credit: 2 },
+    { code: "20001-1003", name: "พลังงาน ทรัพยากรและสิ่งแวดล้อม", creditStr: "2-0-2", credit: 2 },
+    { code: "20000-1601", name: "ทักษะสุขภาพ", creditStr: "0-2-1", credit: 1 },
+    { code: "20000-1208", name: "ภาษาอังกฤษสถานประกอบการ", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-8001", name: "วิชาฝึกงาน", creditStr: "0-40-4", credit: 4 }
+  ],
+  // แผน 6 (รวม 17 หน่วยกิต -> สะสม 105 หน่วยกิต)
+  [
+    { code: "20000-1302", name: "วิทยาศาสตร์เพื่อพัฒนาอาชีพธุรกิจและบริการ", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-2109", name: "การสร้างเว็บไซต์", creditStr: "2-2-3", credit: 3 },
+    { code: "20204-2103", name: "โปรแกรมนำเสนอ", creditStr: "1-2-2", credit: 2 },
+    { code: "20204-2102", name: "โปรแกรมตารางงาน", creditStr: "2-2-3", credit: 3 },
+    { code: "20204-8501", name: "โครงงาน", creditStr: "0-12-4", credit: 4 },
+    { code: "20204-2007", name: "จริยธรรมและกฎหมายคอมพิวเตอร์", creditStr: "2-0-2", credit: 2 },
+    { code: "20000-1219", name: "ภาษาอังกฤษเตรียมความพร้อมเพื่อการทำงาน", creditStr: "0-2-1", credit: 1 }
+  ]
+];
+
+const ACTIVITY_BY_PLAN = [
+  { code: "20000-2001", name: "กิจกรรมลูกเสือวิสามัญ 1", creditStr: "0-2-0", gradeStr: "ผ." },
+  { code: "20000-2002", name: "กิจกรรมลูกเสือวิสามัญ 2", creditStr: "0-2-0", gradeStr: "ผ." },
+  { code: "20000-2007", name: "กิจกรรมส่งเสริมคุณธรรม จริยธรรม", creditStr: "0-2-0", gradeStr: "ผ." },
+  { code: "20000-2008", name: "กิจกรรมที่สถานศึกษาหรือสถานประกอบการจัด", creditStr: "0-2-0", gradeStr: "ผ." },
+  { code: "20000-2011", name: "กิจกรรมที่สถานศึกษาหรือสถานประกอบการจัด", creditStr: "0-2-0", gradeStr: "ผ." },
+  { code: "20000-2012", name: "กิจกรรมที่สถานศึกษาหรือสถานประกอบการจัด", creditStr: "0-2-0", gradeStr: "ผ." }
+];
+
+const PRIOR_CREDITS_BY_PLAN = [0, 18, 36, 55, 73, 88];
+
+const GRADE_OVERRIDES = {
+  "0_68130492104_1": null,
+  "0_68130492118_3": null,
+  "0_68130492220_1": 3.5,
+  "0_68130492223_5": 2.5,
+  "0_68130492227_1": 4.0,
+  "4_66130492206_1": 3.0
+};
+
+const RAW_RECORDS = `0|68130492101|นายพลกร บุตรศิริ|49,49,33,40,35,47,33,40,40
+0|68130492102|น.ส.กุลณัฐ อุ่นกูล|81,81,63,80,60,81,60,65,76
+0|68130492103|น.ส.ปิยะมาศ คล้อยเอี่ยม|80,80,69,83,69,73,67,71,82
+0|68130492104|น.ส.มนัสญา เกิดกลาง|,0,35,38,35,,45,40,38
+0|68130492105|น.ส.วรางคณา ปานทอง|82,71,68,70,69,73,68,66,72
+0|68130492106|นายวรากร เจนปรุ|89,81,70,80,68,69,71,73,81
+0|68130492107|น.ส.ชญานันท์ มหาดไทย|76,76,69,81,67,72,71,71,80
+0|68130492108|น.ส.จุฑาภรณ์ ประสมเพชร|85,82,65,80,76,81,64,77,80
+0|68130492109|น.ส.สุดารักษ์ วิชุมา|71,70,61,74,60,64,61,67,71
+0|68130492110|นายแทนชนก แย้มประโคน|83,73,68,71,65,71,64,73,77
+0|68130492111|นายสุรชัย กลั่นเขียว|89,89,74,83,81,78,75,73,84
+0|68130492112|น.ส.ณัฐธิชา สุขกำเนิด|93,80,77,80,90,83,73,80,87
+0|68130492113|นายทรงธรรม วัดสำโรง|83,82,64,80,86,81,66,72,77
+0|68130492114|น.ส.ศิริพร นิราชรัมย์|49,49,49,37,35,47,33,41,40
+0|68130492115|นายกฤษณะ รู้กิจนา|74,70,65,75,60,74,69,67,73
+0|681304921116|นายระวิภาส คงขุนทด|,,33,37,35,,33,40,38
+0|68130492117|นายกัณฑ์คณัฐ พัชระธนิตกุล|78,76,68,80,65,69,65,70,78
+0|68130492118|น.ส.ชวัลณัฏฐ์ พัชระธนิตกุล|49,49,46,40,40,44,46,48,37
+0|68130492119|น.ส.ฐิติภัสร์ พัชระธนิตกุล|81,83,63,80,66,81,67,72,80
+0|68130492120|นายเจษฏาภรณ์ ใจทน|83,80,66,80,65,81,66,71,80
+0|68130492121|นายชัยณรงค์ อินทฤาชัย|49,49,33,40,35,47,33,41,40
+0|68130492122|น.ส.สุมินตรา แซ่เหลา|49,49,34,37,35,47,34,40,37
+0|68130492123|น.ส.สุดารัตน์ สายจันทร์|95,84,79,87,82,91,79,74,85
+0|68130492124|น.ส.สมพร เมฆจะบก|95,92,78,84,75,91,77,79,84
+0|68130492125|น.ส.รชยาทิพย์ วีริศราวุฒิกุล|89,86,79,83,74,79,79,74,85
+0|68130492126|น.ส.ประภัสสร อาศัย|87,88,75,88,65,78,70,74,83
+0|68130492127|น.ส.สุปราณี เลขนอก|80,75,61,81,61,72,61,71,77
+0|68130492128|นายเกียรติศักดิ์ จุลกระโทก|49,49,34,38,47,47,34,40,37
+0|68130492129|น.ส.นภัสวรรณ ติระพงส์ประเสริฐ|49,49,33,37,47,47,33,40,37
+0|68130492130|นายเมธัส วัฒนาศิลป์|86,86,70,82,76,90,76,79,80
+0|68130492131|น.ส.มีนา ศรีปัญญา|87,78,75,84,74,78,78,74,85
+0|68130492132|นายชาคริต โพธิบัติ|77,73,73,73,67,72,73,66,74
+0|68130492133|น.ส.อนิสา ทุมพา|83,74,77,70,76,79,78,82,80
+0|68130492134|น.ส.สกุลกาญจน์ ศรีสุขใส|77,71,70,72,74,67,64,70,79
+0|68130492135|น.ส.จิรภิญญา จิตรจันทร์|82,87,74,80,95,89,74,75,83
+0|68130492136|น.ส.กนกวรรณ คงสาย|94,81,73,80,80,83,66,77,87
+0|68130492137|นายพิชญะ ศรีบาลชื่น|80,78,65,76,80,81,64,77,75
+0|68130492138|น.ส.ปิยนุช เตียนพลกรัง|74,75,65,76,65,69,65,64,75
+0|68130492139|นายสุธี รองในเมือง|49,49,33,40,35,47,33,40,38
+0|68130492140|น.ส.นันท์นภัส ชูแก้ว|,,33,37,35,,33,40,37
+0|68130492201|น.ส.ชัญรญา สรวงท่าไม้|76,75,63,80,65,69,64,70,76
+0|68130492202|น.ส.รุ่งนภา บุญเพ็ชร|76,75,66,80,66,69,64,68,81
+0|68130492203|น.ส.วริษา สรรพาวุธ|86,77,73,86,74,77,73,70,86
+0|68130492204|นายณัฐวุฒิ แสงทอง|84,72,65,78,70,75,62,70,79
+0|68130492205|น.ส.ณัฐภรณ์ มีใหม่|77,73,66,79,65,69,68,62,78
+0|68130492206|น.ส.สุวิมล มีใหม่|76,76,68,80,63,69,68,66,77
+0|68130492207|นายจิรพัฒน์ ดวงแก้ว|94,78,73,80,84,88,70,77,85
+0|68130492208|น.ส.ณัฏฐธิดา สมพร|82,81,64,80,71,81,67,72,78
+0|68130492210|นายวโรดม พรหมอิสาณ|92,89,77,81,96,86,75,77,81
+0|68130492211|นายรัฐภูมิ ป่วงกลาง|,,41,40,36,,41,48,38
+0|68130492212|น.ส.สุภัคจิรา ไตรพิธมงคลกุล|85,84,73,83,90,73,75,73,83
+0|68130492213|น.ส.จันจิรา เข็มเงิน|49,49,40,38,40,47,43,48,38
+0|68130492214|นายชินพัฒน์ แน่นหนา|49,49,33,39,35,47,33,40,37
+0|68130492215|น.ส.สุธิสา ดงแดง|95,95,73,84,99,91,69,79,85
+0|68130492216|นายอมรเทพ ศรีบาลชื่น|81,81,63,80,80,81,66,77,77
+0|68130492217|นายศตายุ แก้วมีศรี|49,49,44,37,37,47,44,40,47
+0|68130492218|น.ส.ปลายฟ้า วิเชียรทอง|95,80,78,81,90,91,76,79,86
+0|68130492219|น.ส.สุพรรษา โพธิ์ศรี|77,76,66,80,71,76,64,60,76
+0|68130492220|น.ส.ประภาพร สีพะนาม|75,72,64,77,72,69,67,61,74
+0|68130492223|น.ส.แสงรวี อาภรณ์พิศาล|86,82,76,81,68,78,76,66,80
+0|68130492224|นายสุกฤษฏิ์ ถาดกระโทก|70,70,63,75,60,64,64,62,76
+0|68130492225|นางฐิติกานต์ เข็มเงิน|49,49,46,37,40,47,49,48,37
+0|68130492226|นายสิปปกร ชนะวรรณโณ|80,81,71,89,70,70,71,80,89
+0|68130492227|น.ส.สุภาพร เรืองศรี|89,76,74,80,71,79,65,74,86
+0|68130492228|น.ส.ภัสสร แขจอหอ|81,81,65,82,72,83,65,82,77
+1|68130491101|น.ส.นารีรัตน์ ผลประกอบ|69,83,81,81,73,72,82,76,71,83
+1|68130491102|นายกฤษดา ผลอินทร์มะเริง|69,78,73,83,72,69,83,74,66,82
+1|68130491103|น.ส.ธัญยรัตน์ บวรแสนทวีสุข|69,80,88,83,85,75,83,75,78,83
+1|68130491104|นายไชยวัฒน์ สุรเตมีย์กุล|69,79,88,81,73,70,72,70,70,83
+1|68130491105|นายธีธัช บุระมิ|64,78,65,68,68,69,67,70,70,65
+1|68130491106|น.ส.สุพรรษา โฮมจูมจัง|39,49,35,42,40,47,38,47,47,35
+1|68130491107|น.ส.ชนากานต์ จิตรไธสง|93,87,100,96,79,94,93,91,89,100
+1|68130491108|น.ส.กัลยารัตน์ รุ่งเรืองฐิติเดช|71,76,72,69,73,67,77,69,69,65
+1|68130491110|น.ส.อมรินทร์ ตะนนท์|89,83,78,83,83,89,89,82,83,92
+1|68130491111|น.ส.อาทิติยา วามะกัน|39,49,35,45,40,47,38,47,47,35
+1|68130491113|น.ส.พัณณ์พิชญา คีรินทร์พัชญ์|72,81,66,79,72,78,78,71,72,89
+1|68130491114|นายรวิภาส ทัศสมบูรณ์|69,79,65,79,70,69,68,70,67,75
+1|68130491115|น.ส.สาวิตรา หาบจะบก|39,48,35,42,40,47,38,47,47,35
+1|68130491116|น.ส.ภรภัทร สุทธิแพทย์|75,79,65,81,72,81,75,82,80,85
+1|68130491117|น.ส.พิมพ์ชนก นามสง่า|64,72,60,60,65,62,63,67,65,60
+1|68130491118|น.ส.สุชาวดี กุลจันทะ|78,88,74,76,60,69,68,74,73,67
+1|68130491119|น.ส.รัฐฏาภรณ์ แสงจันทร์ศรี|64,70,60,60,65,62,63,65,67,60
+1|68130491120|นายชัยวัฒน์ นิติสิทธ์|64,71,60,73,61,62,63,65,65,70
+1|68130491121|นายสมเพชร โสดา|69,80,65,83,67,69,68,70,70,65
+1|68130491122|นายณัฐวุฒิ นาคกระโทก|39,47,35,42,40,47,38,47,47,35
+1|68130491123|นายอภิสิทธิ์ ตรีผล|75,82,74,79,69,70,81,68,67,81
+1|68130491124|น.ส.อัญชลี แพปรุ|64,73,60,60,62,62,63,65,65,60
+1|68130491125|นายพีระพัฒน์ อาศัย|64,80,60,60,63,62,63,65,66,60
+1|68130491126|นายอรุช นันทพันธ์|70,73,63,64,69,65,70,68,69,63
+1|68130491127|น.ส.ภัชดาภรณ์ สัญจรโคกสูง|64,80,60,68,64,69,63,68,67,70
+1|68130491128|น.ส.อนุสรา ผลกระโทก|84,81,84,94,80,81,92,86,85,85
+1|68130491129|น.ส.ภูริชา แจ้งกิจจา|39,47,45,42,40,47,38,47,47,35
+1|68130491130|น.ส.อมรภัทร การสมลาภ|70,79,65,69,82,68,68,65,67,69
+1|68130491131|น.ส.ภักดี อริยเมธีกุล|78,85,60,68,62,69,63,75,75,60
+1|68130491132|นายสิทธิพล ดวงมาลา|65,71,60,60,63,62,63,68,72,60
+1|68130491133|นายนนทวัฒน์ สุพานิชย์|39,47,35,42,40,47,38,47,47,35
+1|68130491135|น.ส.กนกพร ยีรัมย์|39,48,35,42,40,47,38,47,47,35
+1|68130491136|น.ส.ศรันรัตน์ ชุดทะเล|39,49,35,42,40,47,38,47,47,35
+1|68130491137|นายอภิรักษ์ ศรีอัศวิน|76,85,76,77,81,76,83,76,76,73
+1|68130491138|นายเชิดศักดิ์ ปลีกกระโทก|74,84,76,81,78,79,83,78,76,74
+1|68130491139|พระวรเมศวร์ ใจงูเหลือม|83,71,88,84,81,81,82,83,82,86
+1|68130491140|น.ส.สุภาวดี เสรีพิทยารัตน์|84,81,87,81,86,94,93,92,89,92
+1|68130491202|นายสิรภพ เชื่อดี|83,80,95,81,80,81,93,90,90,100
+1|68130491203|นายวรวิบูลย์ คำทองอินทร์|71,88,60,68,77,78,63,71,74,64
+1|68130491205|น.ส.ลดาวรรณ สีเมือง|73,70,69,77,65,67,76,69,68,65
+1|68130491206|น.ส.กัญญาวีร์ ชุ่มชื่น|92,86,91,89,84,94,90,92,92,85
+1|68130491207|น.ส.จิรฐากาญจน์ อยุ่สวัสดิ์|71,78,69,77,75,67,77,69,68,80
+1|68130491208|นายรัฐศาสตร์ สุวรรณสิงห์|70,81,71,81,70,76,71,71,70,85
+1|68130491209|น.ส.จารุณี สังข์จันทึก|91,89,93,91,80,89,96,84,84,85
+1|68130491210|น.ส.ธนาพร โอภาชาติ|71,76,71,90,75,67,77,68,69,65
+1|68130491211|น.ส.สุกานดา รอดกลาง|77,85,79,83,84,79,83,79,78,75
+1|68130491212|นายนันทวัฒน์ พรมรัศมี|78,90,80,83,79,79,78,76,76,75
+1|68130491213|น.ส.จุฑาภรณ์ สุดาบัน|76,88,80,75,76,79,83,77,76,74
+1|68130491215|นายนพกร ศรีสว่าง|64,71,60,68,61,62,63,65,66,60
+1|68130491216|น.ส.ญาณิศา ทรงศิล|64,79,60,65,63,76,63,71,70,65
+1|68130491217|น.ส.รัฐติยา กลางคาน|74,77,75,75,70,69,78,71,70,70
+1|68130491218|น.ส.จีระนันท์ โป่ยขุนทด|39,47,35,42,40,47,38,47,47,35
+1|68130491219|น.ส.ศศิพร กอนไธสง|69,85,75,79,80,76,76,75,74,71
+1|68130491221|นายสิทธิชัย บุญมา|78,83,80,83,83,79,83,77,76,75
+1|68130491222|นายเมธาสิทธิ์ พานปรุ|69,82,77,79,79,74,81,73,75,75
+1|68130491223|น.ส.กาญจนา ม่วงพ่วง|76,84,80,83,84,74,83,74,76,75
+1|68130491224|น.ส.น้ำอ้อย ช่วยไธสง|85,73,80,60,79,83,80,89,86,85
+1|68130491225|น.ส.เกล็ดดาว สมานชัย|39,48,35,49,40,47,38,47,47,35
+1|68130491226|น.ส.มาลี พูนปรุ|90,85,97,89,84,94,93,94,90,100
+1|68130491227|นายประเสริฐ ศรีสา|71,77,72,81,71,74,73,72,74,67
+1|68130491228|นางบุญสิตา จันทร์พิลา|77,88,80,72,84,84,82,84,80,73
+1|68130491229|นายอดิศร ปรุเขต|39,47,35,45,40,47,38,47,47,37
+1|68130491231|น.ส.รมิดา วงศ์สรจักร|64,72,60,60,62,62,63,65,66,60
+1|68130491232|น.ส.ปภาดา วงศ์สรจักร|64,71,60,70,64,62,63,66,66,60
+1|68130491233|น.ส.สุวนันท์ งามขุนทด|69,87,80,83,78,79,83,77,77,75
+1|68130491235|น.ส.พนิดา พรไพศาล|91,86,92,81,76,94,93,90,87,85
+1|68130491236|น.ส.หยาดหยก ยาทองทิพย์|69,77,64,81,68,79,68,71,70,69
+1|68130491237|นายกีรติ คัดตะวงษ์|80,81,94,81,82,91,88,89,87,83
+1|68130491239|นางสมปอง ช่องงาม|90,87,100,96,83,94,93,91,89,100
+1|68130491240|น.ส.สายทอง ไผ่ดอน|64,72,60,68,60,69,63,67,68,60
+1|68130491301|นายอาทิตย์ แก้วอินทรชัย|70,85,77,83,80,94,82,93,90,75
+1|68130491302|นายอังกฤษ เพ็ชรนิล|89,84,92,73,77,94,91,92,87,84
+1|68130491303|น.ส.ปนัสยา รักพุดซา|64,69,60,60,62,62,63,65,65,60
+1|68130491304|นางจุฬาลักษณ์ ปราบงูเหลือม|64,69,60,68,64,62,63,65,66,60
+1|68130491305|นายรณกร เทพกลาง|70,78,65,81,69,76,75,75,75,74
+1|68130491306|นายวุฒิชัย บุขุนทด|75,84,77,70,74,75,82,74,75,74
+1|68130491308|นายณัฐวุฒิ สลอดตะคุ|64,69,60,60,62,62,63,65,65,60
+1|68130491309|น.ส.บัณฑิตา จิตรพิมาย|64,70,60,68,63,62,63,65,65,60
+1|68130491310|น.ส.ศิราณี มั่งทองคำ|87,84,93,81,84,79,92,77,76,92
+1|68130491311|นายนฤเบศร์ พิมพกันต์|84,86,97,70,75,91,88,89,88,88
+1|68130491312|น.ส.หัสดี มะลิมุทวี|64,71,60,68,67,62,63,65,66,60
+1|68130491313|น.ส.พรทิพา สิงหเสนีย์|70,75,65,60,70,72,68,74,75,71
+1|68130491314|นายกำโชค ทรงรัมย์|64,70,60,68,63,62,63,65,65,60
+1|68130491315|น.ส.วาสนา อิทธิพัทธ์เมธี|69,80,68,68,79,77,78,70,70,73
+1|68130491316|นายธีนการต์ พรมสิงห์|39,47,35,42,40,47,38,47,47,35
+2|67130492101|นายอชิตพล เรืองราม|68,68,70,72,65,64,64,61,64,65
+2|67130492103|น.ส.อริส ทองดี|81,75,84,87,81,81,78,77,81,87
+2|67130492105|น.ส.ปรียาพร นิสยันต์|68,69,65,72,65,64,64,61,64,66
+2|67130492106|นายเกียรติศักดิ์ เชียงสวยจิก|88,90,88,87,81,81,80,76,81,91
+2|67130492107|น.ส.กนิษฐา ปวงสุข|78,80,86,87,81,81,80,76,80,89
+2|67130492108|น.ส.ดวงสุดา เนื้อนา|81,79,83,87,81,81,79,76,80,86
+2|67130492109|นางฐิติพร สุคนธ์|89,89,85,87,80,98,97,76,98,88
+2|67130492111|น.ส.ณัฐติยา ประชุมพันธุ์|88,88,83,87,82,81,80,76,81,86
+2|67130492112|น.ส.นันธินีย์ ตะนนท์|78,74,82,87,80,80,79,76,80,86
+2|67130492113|น.ส.ธารา ฤทธิ์ชัยฤกษ์|80,80,85,87,81,81,77,76,80,78
+2|67130492114|น.ส.ณัฐวรรณ ไทยมะณี|81,77,83,87,82,80,80,76,81,76
+2|67130492115|นายสิทธินนท์ ศรีสังข์|77,78,81,87,77,81,71,73,80,77
+2|67130492116|น.ส.ศศิรัตน์ มูลกระโทก|78,77,84,87,80,81,79,75,81,87
+2|67130492117|นางอมรรัตน์ ดำริการวิศาล|78,79,84,87,80,81,79,75,81,77
+2|67130492118|น.ส.วริศรา ขันงูเหลือม|88,89,85,87,80,81,79,75,78,88
+2|67130492119|น.ส.ตุ๊กติ๊ก มิมาซา|85,89,79,85,82,80,78,75,79,87
+2|67130492121|น.ส.รัสสิตา เชาว์ขุนทด|70,69,66,72,67,64,64,62,64,62
+2|67130492122|น.ส.สุภาพร โขสันเทียะ|81,76,81,81,72,73,68,71,71,74
+2|67130492123|น.ส.รุ่งนภา ลาวงษา|88,89,86,86,81,98,96,74,98,89
+2|67130492124|น.ส.มิ่งขวัญ รักษา|89,90,86,87,81,98,97,84,98,89
+2|67130492125|นายจิรศักดิ์ จอมอุย|78,79,85,81,77,73,73,71,73,78
+2|67130492126|นายมานัฐชัย นัยบุรุษ|77,79,86,87,81,81,80,70,80,89
+2|67130492128|น.ส.สุพัตรา กาฬจันโท|67,68,65,72,66,64,64,61,64,64
+2|67130492129|นายธวัชชัย เครือวัลย์|67,68,68,72,67,64,64,62,64,66
+2|67130492130|น.ส.สายฝน เขนสันเทียะ|67,69,65,72,65,64,64,61,64,64
+2|67130492131|น.ส.ทิพย์เกสร ทิพย์ประเสริฐ|49,49,39,47,38,47,47,33,47,34
+2|67130492132|นายวิจัย หงษ์สุวรรณ|49,49,47,47,39,47,47,32,47,42
+2|67130492133|นายวรรธนัย พุทธิมา|80,79,83,87,81,81,80,74,81,76
+2|67130492134|นายอมรเทพ ดีสูงเนิน|49,49,44,47,37,47,47,34,47,44
+2|67130492135|น.ส.กัลยกร ก้านกลาง|69,69,68,72,69,64,64,61,64,67
+2|67130492136|น.ส.จารวี เนาว์สันเทียะ|70,69,64,72,66,64,64,61,64,62
+2|67130492137|นายวิโรจน์ เตชะวัชรานุกูล|71,70,81,81,75,78,78,69,80,86
+2|67130492138|น.ส.ปิยขวัญ พงศ์วิสิษฐ์|75,78,80,81,81,71,72,68,73,74
+2|67130492140|น.ส.วรรณนภา สร้อยสวัสดิ์|87,88,81,86,81,80,77,72,76,85
+2|67130492201|น.ส.ณัฐกมล สาพิมล|86,89,82,86,80,80,78,72,80,85
+2|67130492202|นายภูตะวัน ประหยัดทรัพย์|71,69,79,72,75,71,68,64,71,70
+2|67130492203|น.ส.วลัยลักษณ์ อาศัยนา|49,49,37,47,40,47,47,33,47,32
+2|67130492204|น.ส.ประภาพร เกลี้ยงโคกสูง|75,77,82,72,75,69,73,68,71,74
+2|67130492206|น.ส.อรัญญา ฉิมโพธิ์กลาง|68,69,62,72,69,64,64,61,64,62
+2|67130492207|น.ส.กัญญารัตน์ อ่อนบุตร|68,69,63,72,67,64,64,61,64,63
+2|67130492208|นายปัณณธร บุญเมธาภัทร|87,91,88,87,82,97,97,80,97,90
+2|67130492209|นายชินวัตร ปลั่งกลาง|88,88,81,86,82,81,76,74,80,85
+2|67130492210|น.ส.กัญญา หนูแสง|71,67,68,67,69,64,64,60,64,63
+2|67130492211|น.ส.รุ่งวิภารัตน์ ทองเจริญธีธัช|87,88,83,86,77,98,96,76,98,85
+2|67130492212|นายจารุวัฒน์ ไหนกระโทก|78,79,78,80,75,72,72,70,71,73
+2|67130492214|น.ส.ธัญญาลักษณ์ จันทิมา|89,91,82,95,81,81,80,87,81,86
+2|67130492215|น.ส.ขวัณฌพัสดร์ จันทร์รอด|87,89,82,95,81,81,78,87,80,84
+2|67130492216|น.ส.เกศริน ไพรกลาง|88,90,83,87,81,98,97,75,98,86
+2|67130492217|นายศิวพงษ์ เสพสวัสดิ์|81,79,84,87,82,98,98,74,98,86
+2|67130492218|นางวรรณษา ธงสันเทียะ|78,77,78,93,81,95,95,86,95,73
+2|67130492225|น.ส.พิมพ์นภัส สัมพันธ์พจน์|69,69,66,72,65,64,64,63,64,62
+2|67130492226|น.ส.วรรวิษา คาราวะ|88,89,80,87,81,81,75,75,81,83
+2|67130492227|นายสมบูรณ์ เปลื้องกระโทก|87,89,78,87,80,81,80,78,81,82
+2|67130492228|น.ส.ดวงใจ โจษกลาง|87,91,84,87,81,81,80,78,81,87
+2|67130492229|นายนันทวุฒิ คุ้มจันอัด|69,69,64,72,69,64,64,61,64,62
+2|67130492230|น.ส.สุนิสา บุบผาชาติ|81,80,83,87,82,81,80,75,81,86
+2|67130492231|น.ส.ธัญพัฒน์ โชตินิภาเจริญสุข|86,89,83,86,80,97,95,74,98,86
+2|67130492232|น.ส.ธัญญารัตน์ กลมกระโทก|68,69,66,72,67,64,64,61,64,63
+2|67130492233|น.ส.สุนิสา ปรอยโคกสูง|68,68,70,72,65,64,64,61,64,63
+2|67130492234|นายศิวกร สอนหมวก|79,79,84,82,76,74,73,72,67,69
+2|67130492235|นายอภิชัย จุมพิฎกะพันธุ์|49,80,41,47,39,47,47,33,47,41
+2|67130492236|น.ส.ชุติกาญจน์ สุวรรณทา|80,79,78,82,72,70,72,68,69,71
+2|67130492237|น.ส.รติรัตน์ มีพวงผล|78,80,79,82,82,74,75,73,74,71
+2|67130492238|น.ส.วิภาวรรณ แดนชัยภูมิ|80,79,79,82,73,70,68,68,67,71
+2|67130492239|น.ส.สุพัตรา จอมสูงเนิน|79,81,79,82,72,74,73,72,74,70
+2|67130492240|นายกิตติพงษ์ ด้วงเงิน|85,88,83,87,80,81,79,74,81,86
+2|67130492301|น.ส.ศิริพันธุ์ บุราญรมณ์|48,46,31,47,40,47,47,43,47,31
+2|67130492302|น.ส.ภัณฑิรา ประสานทรัพย์|69,69,83,86,82,71,78,74,81,76
+2|67130492303|น.ส.รุ่งทิวา ชื่นแช่ม|72,72,80,92,76,91,88,80,92,83
+2|67130492304|น.ส.วารุณี พงษ์พันนา|47,49,31,45,37,47,47,44,47,26
+2|67130492305|น.ส.สุชัญญา วรรธยาวรกิต|72,68,63,72,69,64,64,60,64,60
+2|67130492307|นายวรินทร ปีจัตุรัส|77,75,79,77,70,68,71,62,67,68
+2|67130492308|น.ส.มลฤทัย ว่าความดี|83,81,80,81,81,71,72,71,72,72
+2|67130492309|น.ส.ปราณี พงษ์สระพัง|77,75,78,77,75,69,73,66,71,69
+2|67130492312|น.ส.ศศิวรรณ บุญศรี|82,79,82,72,75,74,74,66,73,74
+2|67130492313|น.ส.บุญประสพ หมอกขุนทด|79,79,82,81,75,72,73,71,73,73
+2|67130492314|นายอนุชา นัดกระโทก|88,88,82,87,81,81,78,74,81,85
+2|67130492315|นายภาณุวัฒน์ ศรีแก้วน้ำใส|78,78,80,77,81,80,78,71,81,81
+2|67130492316|น.ส.ปุญญิศา ชาอินทร์|88,88,82,84,79,97,92,75,97,85
+2|65130492103|น.ส.พิมภรณ์ ครองแสนเมือง|79,79,70,83,81,80,78,71,80,61
+3|67130491101|น.ส.สุภาภรณ์ บรรยงค์|77,81,80,81,80,83,87,81
+3|67130491106|น.ส.ธัญรัตน์ จีนน่วม|90,95,76,81,77,92,86,71
+3|67130491107|น.ส.เฉลา จีนน่วม|89,94,74,77,77,89,79,81
+3|67130491108|น.ส.เกศกนก โกมขุนทด|91,95,87,81,87,92,87,81
+3|67130491109|น.ส.ปิยนุช แก่นวิชา|91,94,86,81,87,93,89,81
+3|67130491110|นายพิสุทธิ์ โตสกุลไกร|71,73,71,69,71,70,78,69
+3|67130491111|นายอลงกรณ์ เหมอินทร์|81,80,78,80,77,82,83,80
+3|67130491112|นายธันยพัฒน์ ธรรมมาภานนท์|76,81,80,81,80,83,89,81
+3|67130491113|นายสรธร คงสมปราชญ์|77,78,75,78,76,81,87,80
+3|67130491115|นายปิยะพจน์ ถาวร|80,81,80,81,78,83,88,81
+3|67130491118|น.ส.ปราณี แก้ววิเศษ|67,66,60,64,60,63,68,64
+3|67130491119|น.ส.จารุวรรณ เดชกระโทก|70,78,74,72,80,83,83,78
+3|67130491123|นายธนัท จองรัตนวนิช|80,81,78,80,80,83,87,80
+3|67130491124|น.ส.นริศรา สมใจเรา|78,81,75,81,80,83,89,81
+3|67130491125|น.ส.ธัญพิมล จันทร์แสง|71,78,77,72,77,83,89,80
+3|67130491127|นายสรศักดิ์ เหียนขุนทด|67,78,63,71,65,71,76,71
+3|67130491128|น.ส.นิโคล นวลจังหลีด|81,81,80,78,80,82,89,80
+3|67130491129|น.ส.ปานตะวัน ศรีหาตา|77,81,78,80,78,81,87,80
+3|67130491131|นางวราพร นาคฉ่ำ|73,77,71,76,75,79,88,78
+3|67130491132|น.ส.สุรภี สาครวาสี|66,66,60,64,60,63,68,64
+3|67130491134|น.ส.สุภาภรณ์ พาดทองหลาง|75,75,75,71,75,76,86,73
+3|67130491136|น.ส.กัญญารัตน์ สุขกลาง|72,71,65,71,65,68,76,71
+3|67130491137|น.ส.ศรัญญา ปานแก้ว|66,66,60,64,60,63,69,64
+3|67130491138|นายภาณุวัฒน์ ชุ่มพุดซา|72,71,73,72,75,76,75,75
+3|67130491139|นายกิตติศักดิ์ ค้างสำโรง|66,66,60,64,60,63,72,64
+3|67130491140|น.ส.ศิริลักษณ์ เนยสูงเนิน|70,78,82,76,84,83,89,81
+3|67130491201|น.ส.ธฤษวรรณ เสือสูงเนิน|72,80,86,71,82,83,89,81
+3|67130491203|น.ส.ฐิติมา อุณศิริ|76,76,75,74,74,78,86,73
+3|67130491207|นายธนาวัฒน์ พนมพรม|69,69,64,67,64,66,79,67
+3|67130491208|นายรชวิชญ์ แก้วเขียว|69,69,69,67,66,72,81,69
+3|67130491209|น.ส.เจนนภา มุขพิมาย|81,76,80,76,78,82,90,80
+3|67130491210|นายธารี ตุ่นกระโทก|68,66,60,64,66,63,69,64
+3|67130491211|นายชูชาติ มณีวงค์|67,66,60,64,60,63,68,64
+3|67130491213|น.ส.มานัสนันท์ เพลินกระโทก|72,71,60,71,62,63,79,71
+3|67130491214|น.ส.ศิรินภา มะลิมุทวี|66,66,60,64,60,63,73,64
+3|67130491215|นายอัฐการณ์ มะลิมุทวี|68,66,60,64,60,63,72,64
+3|67130491216|น.ส.จินตนา แก้วหาวงษ์|66,66,60,64,60,63,72,64
+3|67130491217|น.ส.ปรีญารัตน์ นาคแท้|81,81,79,72,82,81,91,80
+3|67130491218|นายศุภโชติ กฤษณสุวรรณ|83,75,71,78,77,75,83,75
+3|67130491219|นายณัฐวุฒิ ปัญญาเลิศ|79,80,74,80,80,83,89,81
+3|67130491221|น.ส.ศิราณี แมลงผึ้ง|73,66,60,64,65,63,70,64
+3|67130491222|นายปัญจพล หนไธสง|78,76,75,73,71,78,78,71
+3|67130491223|นายสุรศักดิ์ รายพิมาย|75,76,75,74,75,78,84,74
+3|67130491224|นายนัยธนิต แซ่กวาง|82,75,72,73,70,76,76,71
+3|67130491225|น.ส.บุษบา สุวรรณโชติ|67,66,60,64,60,63,72,64
+3|67130491226|น.ส.ชื่นจิต ซ้อนพุดซา|81,81,80,81,80,82,89,79
+3|67130491227|น.ส.สุภาวิตา จุ้ยเดช|80,81,77,80,80,82,89,80
+3|67130491228|นายอนิวรรต ทำกิน|66,76,60,64,60,63,74,64
+3|67130491230|น.ส.รุ่งอรุณ นิลภูมิ|47,47,35,47,35,38,49,47
+3|67130491231|นายอชิตะ เจริญสุข|67,66,60,64,60,63,72,64
+3|67130491232|น.ส.สุภาพร ตั้งพงษ์|47,47,35,47,35,38,49,47
+3|67130491233|นายอานันท์ พูนสูงเนิน|71,81,80,71,79,83,89,81
+3|67130491234|นางปิยพร สนั่นไพร|45,45,35,47,35,38,49,47
+3|67130491235|น.ส.รัตติรุณ โคตรวงษ์|67,66,60,64,60,63,74,64
+3|67130491236|นายชรินทร์ สาระ|66,66,60,64,60,63,72,64
+3|67130491237|นายสมคิด เลขกระโทก|67,66,60,64,60,63,72,64
+3|67130491238|น.ส.ฤทัยวรรณ สวัสดี|73,71,71,69,70,71,79,69
+3|67130491239|น.ส.วรรณภา สายหยุด|74,75,67,75,80,83,84,78
+3|67130491240|น.ส.รัชฎาภรณ์ ผลแก้ว|80,81,89,79,90,83,89,81
+3|67130491303|น.ส.กมลชนก สมศรี|80,79,69,81,74,81,89,80
+3|67130491304|นายบดินทร์ มุ่งพันธ์กลาง|78,79,77,80,72,83,88,81
+3|67130491306|น.ส.สุดารัตน์ พรหมมาศ|81,81,79,81,80,83,91,80
+3|67130491307|น.ส.ศศิภา การบรรจง|67,66,60,64,60,63,69,64
+3|67130491309|น.ส.วรรณวิสา จันทร์สวัสดิ์|67,66,60,64,60,63,68,64
+3|67130491310|น.ส.ศศิรินทร์ สินปรุ|81,81,79,81,80,83,89,79
+3|67130491311|นายไพโรจน์ เลิกนอก|66,66,60,64,60,63,69,64
+3|67130491313|นายฉันท์ชนก ศักดิฤทธิ์|73,70,68,68,70,68,80,68
+3|67130491314|นายสุรชาติ แสงสอดสี|73,69,71,69,70,71,82,69
+3|67130491315|นายพงษ์พัฒน์ พวงวงศ์ษา|79,80,80,78,80,80,87,80
+3|67130491316|น.ส.หนึ่งฤทัย ศรีภักดี|73,70,68,68,70,68,82,68
+3|67130491317|น.ส.สมกมล เต้าแก้ว|80,80,78,81,78,81,87,80
+3|67130491319|นายวรพล เก็บสำโรง|66,66,60,64,60,63,69,64
+4|66130492102|นายสัมฤทธิ์ หอมจำปา|75,74,71,73,71,82,100
+4|66130492103|นายชินพัฒน์ บรรจงปรุ|47,33,46,38,46,49,0
+4|66130492105|นายทรงพล ธานี|47,34,46,48,46,48,0
+4|66130492106|น.ส.ชญาดา ขอทับกลาง|82,75,81,83,81,89,100
+4|66130492107|นายเจษฎา ทองศรีมะดัน|78,75,81,78,81,82,100
+4|66130492110|น.ส.สายทอง ท้าวคำหลง|80,75,94,93,94,88,100
+4|66130492111|น.ส.เมริษา ผากาเกตุ|80,75,90,93,90,84,100
+4|66130492112|น.ส.ปรารถนา เพ็ญนาดี|80,75,81,83,81,84,100
+4|66130492113|น.ส.ปารมี ดังใหม่|81,75,94,83,94,86,100
+4|66130492115|นายอรรถพร แสงนาค|76,67,83,71,83,74,100
+4|66130492116|น.ส.พัชรีพรรณ จันทร์สุวรรณ|81,72,81,82,81,86,100
+4|66130492118|นายพิชญะ บุญมาพบ|48,43,46,38,46,49,0
+4|66130492119|นายภควรรษ ทองชื่น|79,72,81,78,81,91,0
+4|66130492120|น.ส.ฟ้าพราว สิงหเสนีย์|81,63,81,82,81,91,100
+4|66130492124|นายตะวัน เต็มจันทร์|69,60,74,63,74,71,0
+4|66130492127|น.ส.รุ่งนภา พรมเมตตา|69,61,79,63,79,72,0
+4|66130492128|นางรัชนี เตียมกระโทก|69,63,74,63,74,71,0
+4|66130492129|นายวงศกร อินนอก|69,63,74,63,74,71,0
+4|66130492130|น.ส.วาสนา แก้วบุญเรือง|69,75,80,78,80,83,100
+4|66130492136|น.ส.อารียา ไชยยนต์|82,84,86,92,86,91,100
+4|66130492137|นายภูพิทักษ์ เสือบุญศรี|69,61,72,63,72,69,0
+4|66130492138|น.ส.ธันย์ชนก อ่อนมี|69,60,73,63,73,69,0
+4|66130492139|น.ส.สุรีพร นัดกระโทก|69,62,79,63,79,68,0
+4|66130492140|นายโชคชัย อ้นศรีวงศ์|69,63,79,63,79,69,0
+4|66130492201|นางเฮะ คิดสำโรง|81,68,81,93,81,83,100
+4|66130492202|น.ส.รสธร เพ็ชรนอก|69,61,75,63,75,80,0
+4|66130492203|น.ส.เยาวลักษณ์ จอมอุย|81,72,86,82,86,88,100
+4|66130492204|น.ส.ปฏิมาพร บุญพิมาย|69,61,73,63,73,70,0
+4|66130492205|น.ส.สุวรรณณิภา ขจรภพ|69,60,73,63,73,71,0
+4|66130492206|นายพิชญพัฒน์ เริงสนาม|69,61,70,63,70,72,0
+4|66130492207|น.ส.พิมพ์ใจ ผึ่งกลาง|78,71,74,68,74,82,100
+4|66130492211|นายจักรพันธ์ จารุแพทย์|69,60,72,63,72,72,0
+4|66130492212|นายจักรพงษ์ จารุแพทย์|72,61,72,63,72,70,0
+4|66130492213|น.ส.ฐิติมา ธิษารักษ์|69,62,72,63,72,71,0
+4|66130492215|น.ส.มานิตา เภสัชชา|72,63,76,63,76,74,0
+4|66130492217|นายณัฐพล วิจันทมุข|77,66,74,79,74,86,80
+4|66130492218|นางฐิตินันท์ วิจันทมุข|77,71,82,80,82,87,80
+4|66130492219|น.ส.จิราพร พลอยสมบุญ|47,33,46,38,46,47,0
+4|66130492220|นายพัชระ พุทธิชาติ|79,85,76,77,76,87,80
+4|66130492222|นายนรากร ผลาโชติ|75,71,72,71,72,76,0
+4|66130492225|นายแสงทวี บุญประกอบ|79,76,71,76,71,74,80
+4|66130492226|นายอัษฎายุธ เพิ่มสันเทียะ|81,76,74,78,74,85,0
+4|66130492229|นายนิพนธ์ อดุลกลาง|77,69,72,73,72,79,80
+4|66130492230|น.ส.อมรรัตน์ มาลีประคำ|79,72,74,77,74,84,80
+4|66130492231|นายกฤษนันท์ จินตนามณีรัตน์|77,71,74,75,74,83,100
+4|66130492232|น.ส.เขมิกา รุ่งเรือง|81,75,75,68,75,81,80
+4|66130492235|น.ส.ปพิชญา สุขไม้|42,33,46,38,46,47,100
+4|66130492236|นายวรปรัชญ์ สุวรรณศิริ|75,68,70,63,70,71,80
+4|66130492237|นายธูนวัตน์ ลาภกระโทก|75,67,71,74,71,78,80
+4|66130492238|นายภาคภูมิ พลจันทึก|75,64,74,68,74,79,0
+4|65130492134|น.ส.กัญญเนตร นาประจักษ์|71,64,74,79,74,78,80
+4|67130492113|น.ส.ธารา กุทธ์ชัยฤทธิ์|42,48,36,,36,,0
+4|66130491139|น.ส.ศิริรัตน์ ไทยกลาง|,,,,,,100
+4|66130491134|นายการัณยภาสน์ มะเดื่อ|,,,,,,100
+4|67130491230|น.ส.รุ่่งอรุณ นิลภูมิ|,,,,74,,
+5|66130491101|นายชนายุทธ์ แก้วแสน|69,67,67,78,79,80,81
+5|66130491103|น.ส.พรพิมล ยันตะพันธ์|69,70,71,80,79,79,79
+5|66130491104|น.ส.ภาวินี สารโคกสูง|69,73,71,78,79,78,81
+5|66130491106|น.ส.เกวลิน บรรยง|35,38,37,47,34,42,48
+5|66130491107|น.ส.กัญญารัตน์ วงศ์สูงเนิน|77,88,71,81,94,85,84
+5|66130491108|น.ส.นิตยา สิงห์กลาง|77,86,70,80,94,85,84
+5|66130491109|น.ส.บังอร จันทรสมาน|35,36,38,47,34,42,48
+5|66130491110|น.ส.สายธาร ทองสันเทียะ|75,87,70,80,94,86,85
+5|66130491111|น.ส.วาสนา สมานมิตร|35,38,32,47,34,42,45
+5|66130491114|นายอำนาจ ชัยเมืองแมน|35,38,32,47,34,42,44
+5|66130491115|นายอภิมุข พึ่งสันเทียะ|60,63,60,68,34,64,70
+5|66130491116|นายชัยบดินทร์ ม่วงประกาย|60,63,60,68,34,64,70
+5|66130491117|นายณัชพล แก้วสว่าง|60,63,60,68,34,64,69
+5|66130491118|นายรัฐศาสตร์ อาษาบาล|40,43,44,47,34,47,48
+5|66130491120|น.ส.สุชัญญา สุวรรณเลิศ|35,38,33,47,34,42,44
+5|66130491121|น.ส.กชนิภา กิรณะวัฒน์|88,88,66,80,94,86,87
+5|66130491122|นายวิชรัตน์ เทวสิทธิ์|68,80,61,80,79,72,70
+5|66130491123|นายเตชิน กองชัย|72,73,60,80,79,71,81
+5|66130491124|นายธีรภัฒฑ์ ขจัดภัย|73,85,63,81,94,86,87
+5|66130491125|นายวรพล แสวงชัย|65,83,71,80,79,73,77
+5|66130491128|น.ส.อมลธีรา ดีทั่ว|35,38,39,47,34,42,47
+5|66130491129|น.ส.ปาริชาต รุจาคม|35,38,48,47,34,42,44
+5|66130491133|นายอรรฆเดช เจียกโคกกรวด|74,86,69,81,79,85,83
+5|66130491134|นายการัณยภาสน์ มะเดื่อ|75,87,70,80,79,90,87
+5|66130491135|นายวรภัทร สุวรรณ|65,88,71,80,94,86,87
+5|66130491136|นายสิทธิศักดิ์ ก้านพลูกลาง|60,63,60,80,34,64,69
+5|66130491139|น.ส.ศิริรัตน์ ไทยกลาง|65,77,65,80,94,73,81
+5|66130491201|นายยุรนันท์ นุ่นแก้ว|69,81,62,81,79,75,75
+5|66130491202|นายบุญช่วย สิทธิเสือ|66,83,65,81,79,77,70
+5|66130491203|น.ส.ไพรินทร์ กองจันทร์ดี|65,87,71,80,94,86,86
+5|66130491204|นายเอกชัย เชื้อมอญยาว|70,73,61,80,79,75,73
+5|66130491206|น.ส.หนึ่งฤทัย แสจันทึก|75,78,61,80,79,79,85
+5|66130491207|นายธัชชัย เฉลียวไว|70,76,64,80,79,79,75
+5|66130491209|นายพันธุ์เพชร ทองพรมราช|70,83,60,82,94,84,82
+5|66130491212|นางไปรยา วอทอง|70,75,60,80,79,86,85
+5|66130491213|นายสิทธิศักดิ์ ปลั่งกลาง|67,69,64,78,79,74,70
+5|66130491214|นายพีรพัฒน์ จันทร์หอมกุล|70,73,60,80,79,78,75
+5|66130491215|น.ส.ชลดา เรืองดำ|35,38,33,49,34,42,44
+5|66130491216|น.ส.พรรปพร ป้องนิล|65,87,70,80,94,84,86
+5|66130491217|นายสมเจตน์ นักฟ้อน|35,38,35,47,34,42,48
+5|66130491218|นายมงคล บ.ป.สูงเนิน|35,38,34,47,34,42,47
+5|66130491225|นายภาคภูมิ ทรัพย์วิริยะกุล|60,73,63,81,79,73,70
+5|65130492127|น.ส.สลิลทิพย์ โชคสันเทียะ|65,77,60,81,77,78,77
+5|66130492103|นายชินพัฒน์ บรรจงปรุ|74,83,71,81,77,84,85
+5|65130492141|นายวีรไทย สมใจเพ็ง|65,83,65,81,,72,78
+5|67130491230|น.ส.รุ่งอรุณ นิลภูมิ|65,73,64,81,77,,75
+5|66130492235|น.ส. ปพิชญา สุขไม้|60,,60,81,77,,70`;
+
+function scoreToGrade(score) {
+  if (score === null || score === undefined || isNaN(score)) return null;
+  if (score >= 80) return 4.0;
+  if (score >= 75) return 3.5;
+  if (score >= 70) return 3.0;
+  if (score >= 65) return 2.5;
+  if (score >= 60) return 2.0;
+  if (score >= 55) return 1.5;
+  if (score >= 50) return 1.0;
+  return 0.0;
+}
+
+const studentsMap = {};
+let pendingStudent = null;
+let activeStudent = null;
+let currentPin = "";
+
+function initDatabase() {
+  const lines = RAW_RECORDS.trim().split("\n");
+  lines.forEach(line => {
+    const [pIdxStr, sid, name, scoresStr] = line.split("|");
+    const pIdx = parseInt(pIdxStr, 10);
+    const planName = PLAN_NAMES[pIdx];
+    const courseMetaList = COURSE_METADATA_BY_PLAN[pIdx];
+    const scoreTokens = scoresStr.split(",");
+
+    if (!studentsMap[sid]) {
+      studentsMap[sid] = {
+        id: sid,
+        pin: sid.slice(-4),
+        name: name.replace(/\s+/g, " ").trim(),
+        primaryPlanIdx: pIdx,
+        plans: [],
+        records: []
+      };
+    }
+    if (!studentsMap[sid].plans.includes(planName)) {
+      studentsMap[sid].plans.push(planName);
+    }
+
+    scoreTokens.forEach((tok, sIdx) => {
+      const score = tok === "" ? null : parseFloat(tok);
+      const overrideKey = `${pIdx}_${sid}_${sIdx}`;
+      const expG = scoreToGrade(score);
+      const grade = (overrideKey in GRADE_OVERRIDES) ? GRADE_OVERRIDES[overrideKey] : expG;
+      const meta = courseMetaList[sIdx];
+
+      if (score !== null || grade !== null) {
+        studentsMap[sid].records.push({
+          planIdx: pIdx,
+          plan: planName,
+          code: meta.code,
+          subject: meta.name,
+          creditStr: meta.creditStr,
+          credit: meta.credit,
+          score: score,
+          grade: grade
+        });
+      }
+    });
+  });
+}
+
+function normalizeName(str) {
+  return str
+    .replace(/^(นางสาว|น\.ส\.|นาย|นาง|พระ)\s*/g, "")
+    .replace(/\s+/g, "")
+    .toLowerCase();
+}
+
+function maskStudentInfo(student) {
+  const maskedId = student.id.slice(0, -4) + "••••";
+  return `${student.name} (${maskedId})`;
+}
+
+function getAcademicMeta(student) {
+  const sid = student.id;
+  const yearDigits = sid.slice(0, 2);
+  const groupCode = sid.length >= 9 ? sid.slice(0, 9) : sid;
+  const subGroupDigit = sid.length >= 9 ? sid.charAt(8) : "1";
+  const shortGroup = `${subGroupDigit}/${yearDigits}`;
+
+  let levelYear = 1;
+  if (yearDigits === "68") levelYear = 1;
+  else if (yearDigits === "67") levelYear = 2;
+  else if (yearDigits === "66" || yearDigits === "65") levelYear = 3;
+
+  const yearLevelStr = `ปวช.${levelYear}/${subGroupDigit}`;
+  return { groupCode, shortGroup, yearLevelStr };
+}
+
+// ============================================================================
+// 2. ค้นหาและเรียกหน้าต่างใส่ PIN 4 หลัก
+// ============================================================================
+function initiateSearch(e) {
+  e.preventDefault();
+  const rawInput = document.getElementById("searchKeyInput").value.trim();
+  const errBox = document.getElementById("searchErrorBox");
+
+  if (!rawInput) return;
+
+  let found = studentsMap[rawInput];
+  if (!found) {
+    const cleanQuery = normalizeName(rawInput);
+    found = Object.values(studentsMap).find(st =>
+      st.name.replace(/\s+/g, "").toLowerCase() === rawInput.replace(/\s+/g, "").toLowerCase() ||
+      (cleanQuery.length >= 4 && normalizeName(st.name) === cleanQuery)
+    );
+  }
+
+  if (!found) {
+    errBox.classList.remove("hidden");
+    return;
+  }
+
+  errBox.classList.add("hidden");
+  document.getElementById("searchKeyInput").blur(); // ซ่อนคีย์บอร์ดมือถืออัตโนมัติ
+  pendingStudent = found;
+  openPinModal(found);
+}
+
+// ============================================================================
+// 3. ระบบควบคุม PIN Modal
+// ============================================================================
+function openPinModal(student) {
+  currentPin = "";
+  updatePinDots();
+  document.getElementById("pinErrorMsg").classList.add("hidden");
+  document.getElementById("pinTargetName").textContent = maskStudentInfo(student);
+  document.getElementById("modal-pin").classList.remove("hidden");
+}
+
+function closePinModal() {
+  document.getElementById("modal-pin").classList.add("hidden");
+  pendingStudent = null;
+  currentPin = "";
+}
+
+function pressPin(digit) {
+  if (!pendingStudent || currentPin.length >= 4) return;
+  document.getElementById("pinErrorMsg").classList.add("hidden");
+  currentPin += digit;
+  updatePinDots();
+
+  if (currentPin.length === 4) {
+    setTimeout(verifyPinCode, 140);
+  }
+}
+
+function backspacePin() {
+  if (currentPin.length > 0) {
+    currentPin = currentPin.slice(0, -1);
+    updatePinDots();
+  }
+}
+
+function clearPin() {
+  currentPin = "";
+  updatePinDots();
+}
+
+function updatePinDots() {
+  const dots = document.querySelectorAll(".pin-dot");
+  dots.forEach((dot, idx) => {
+    if (idx < currentPin.length) {
+      dot.classList.add("bg-[#007AFF]", "border-[#007AFF]", "scale-110");
+      dot.classList.remove("border-[#8E8E93]");
+    } else {
+      dot.classList.remove("bg-[#007AFF]", "border-[#007AFF]", "scale-110");
+      dot.classList.add("border-[#8E8E93]");
+    }
+  });
+}
+
+function verifyPinCode() {
+  if (!pendingStudent) return;
+
+  if (currentPin === pendingStudent.pin) {
+    const verifiedStudent = pendingStudent;
+    closePinModal();
+    navigateToProfileScreen(verifiedStudent);
+  } else {
+    const card = document.getElementById("pinModalCard");
+    card.classList.remove("shake-anim");
+    void card.offsetWidth;
+    card.classList.add("shake-anim");
+    document.getElementById("pinErrorMsg").classList.remove("hidden");
+    currentPin = "";
+    updatePinDots();
+  }
+}
+
+document.addEventListener("keydown", function(e) {
+  const modalOpen = !document.getElementById("modal-pin").classList.contains("hidden");
+  if (!modalOpen) return;
+
+  if (e.key >= "0" && e.key <= "9") {
+    pressPin(e.key);
+  } else if (e.key === "Backspace") {
+    backspacePin();
+  } else if (e.key === "Escape") {
+    closePinModal();
+  }
+});
+
+// ============================================================================
+// 4. แสดงผลหน้าโปรไฟล์บนมือถือ/คอม & เตรียมใบรายงานผลการศึกษา A4
+// ============================================================================
+function formatGradeBadge(g) {
+  if (g === null || g === undefined) {
+    return `<span class="px-3 py-1 rounded-full bg-[#F2F2F7] text-[#8E8E93] font-semibold text-xs">รอผล</span>`;
+  }
+  if (g === 4) return `<span class="px-3 py-1 rounded-full bg-[#34C759]/15 text-[#248A3D] font-bold text-xs">4.0</span>`;
+  if (g === 3.5) return `<span class="px-3 py-1 rounded-full bg-[#30B0C7]/15 text-[#0071A4] font-bold text-xs">3.5</span>`;
+  if (g === 3) return `<span class="px-3 py-1 rounded-full bg-[#007AFF]/12 text-[#007AFF] font-bold text-xs">3.0</span>`;
+  if (g >= 2) return `<span class="px-3 py-1 rounded-full bg-[#5856D6]/12 text-[#5856D6] font-bold text-xs">${g.toFixed(1)}</span>`;
+  if (g >= 1) return `<span class="px-3 py-1 rounded-full bg-[#FF9500]/15 text-[#C93400] font-bold text-xs">${g.toFixed(1)}</span>`;
+  return `<span class="px-3 py-1 rounded-full bg-[#FF3B30]/15 text-[#D70015] font-bold text-xs">0.0</span>`;
+}
+
+function navigateToProfileScreen(student) {
+  activeStudent = student;
+  const meta = getAcademicMeta(student);
+
+  let totalCredits = 0;
+  let totalGradePoints = 0;
+  let validScores = [];
+
+  student.records.forEach(r => {
+    if (r.grade !== null && r.grade !== undefined) {
+      totalCredits += r.credit;
+      totalGradePoints += r.grade * r.credit;
+    }
+    if (r.score !== null && r.score !== undefined) {
+      validScores.push(r.score);
+    }
+  });
+
+  const weightedGpa = totalCredits > 0 ? (totalGradePoints / totalCredits).toFixed(2) : "-";
+  const avgScore = validScores.length > 0
+    ? (validScores.reduce((a, b) => a + b, 0) / validScores.length).toFixed(2)
+    : "-";
+
+  const passCount = student.records.filter(r => r.grade !== null && r.grade > 0).length;
+  const failCount = student.records.length - passCount;
+  const priorCredits = PRIOR_CREDITS_BY_PLAN[student.primaryPlanIdx] || 0;
+  const cumCredits = priorCredits + totalCredits;
+
+  document.getElementById("pFullName").textContent = student.name;
+  document.getElementById("pStudentId").textContent = student.id;
+  document.getElementById("pClassGroup").textContent = `${meta.yearLevelStr} (${meta.shortGroup})`;
+  document.getElementById("pTermCreditsBadge").textContent = `${totalCredits} หน่วยกิต`;
+  document.getElementById("pCumCreditsMobile").textContent = `${cumCredits} หน่วยกิต`;
+  document.getElementById("pGpaValue").textContent = weightedGpa;
+  document.getElementById("pAvgScore").textContent = `คะแนนเฉลี่ยรวม ${avgScore} / 100`;
+  document.getElementById("pCountTotal").textContent = `${student.records.length} วิชา`;
+  document.getElementById("pCountPass").textContent = `${passCount} วิชา`;
+  document.getElementById("pCountFail").textContent = `${failCount} วิชา`;
+
+  const statusBadge = document.getElementById("pStatusBadge");
+  if (failCount === 0) {
+    statusBadge.className = "px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[#34C759]/15 text-[#248A3D]";
+    statusBadge.textContent = "กำลังศึกษา • ผ่านครบทุกวิชา";
+  } else {
+    statusBadge.className = "px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[#FF9500]/15 text-[#C93400]";
+    statusBadge.textContent = `มีวิชาติด 0 / รอผล (${failCount} วิชา)`;
+  }
+
+  const sortedRecords = [...student.records].sort((a, b) => a.code.localeCompare(b.code));
+  const activityCourse = ACTIVITY_BY_PLAN[student.primaryPlanIdx];
+
+  const allDisplayCourses = [
+    ...sortedRecords.map(r => ({
+      code: r.code,
+      name: r.subject,
+      creditStr: r.creditStr,
+      score: r.score,
+      grade: r.grade,
+      gradeStr: r.grade !== null ? r.grade.toFixed(1) : "-"
+    })),
+    {
+      code: activityCourse.code,
+      name: activityCourse.name,
+      creditStr: activityCourse.creditStr,
+      score: null,
+      grade: "ผ.",
+      gradeStr: activityCourse.gradeStr,
+      isActivity: true
+    }
+  ].sort((a, b) => a.code.localeCompare(b.code));
+
+  // 1. สร้างรายการการ์ดสำหรับหน้าจอมือถือ (Mobile View)
+  const mobileList = document.getElementById("pMobileSubjectList");
+  mobileList.innerHTML = allDisplayCourses.map(c => {
+    const scorePill = c.isActivity
+      ? `<span class="text-[11px] text-[#8E8E93]">วิชากิจกรรม</span>`
+      : `<span class="text-[11px] text-[#8E8E93]">คะแนน: <strong class="text-[#1C1C1E]">${c.score !== null ? c.score : "-"}</strong>/100</span>`;
+    const gradeBadge = c.isActivity
+      ? `<span class="px-3 py-1 rounded-full bg-[#34C759]/15 text-[#248A3D] font-bold text-xs">ผ.</span>`
+      : formatGradeBadge(c.grade);
+
+    return `
+      <div class="p-4 flex items-center justify-between gap-3 active:bg-[#F2F2F7]/70 transition">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 mb-0.5">
+            <span class="font-mono text-[11px] font-semibold text-[#007AFF] bg-[#007AFF]/10 px-2 py-0.5 rounded-md">${c.code}</span>
+            <span class="text-[11px] text-[#8E8E93] font-mono">หน่วยกิต ${c.creditStr}</span>
+          </div>
+          <div class="font-bold text-[#1C1C1E] text-sm leading-snug break-words mt-1">${c.name}</div>
+          <div class="mt-1">${scorePill}</div>
+        </div>
+        <div class="shrink-0 text-right">
+          <div class="text-[10px] text-[#8E8E93] mb-1 text-center">เกรด</div>
+          ${gradeBadge}
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // 2. สร้างตารางสำหรับหน้าจอคอมพิวเตอร์ (Desktop View)
+  const tbody = document.getElementById("pSubjectTableBody");
+  tbody.innerHTML = allDisplayCourses.map(c => {
+    const scoreDisplay = c.isActivity ? `<span class="text-xs text-[#8E8E93]">กิจกรรม</span>` : (c.score !== null ? c.score : "-");
+    const gradeBadge = c.isActivity
+      ? `<span class="px-3 py-1 rounded-full bg-[#34C759]/15 text-[#248A3D] font-bold text-xs">ผ.</span>`
+      : formatGradeBadge(c.grade);
+
+    return `
+      <tr class="hover:bg-[#F2F2F7]/60 transition">
+        <td class="py-3.5 px-4 font-mono text-xs font-semibold text-[#3A3A3C]">${c.code}</td>
+        <td class="py-3.5 px-4 font-semibold text-[#1C1C1E]">${c.name}</td>
+        <td class="py-3.5 px-4 text-center font-mono text-xs text-[#8E8E93]">${c.creditStr}</td>
+        <td class="py-3.5 px-4 text-center font-bold text-[#1C1C1E]">${scoreDisplay}</td>
+        <td class="py-3.5 px-4 text-center">${gradeBadge}</td>
+      </tr>
+    `;
+  }).join("");
+
+  // 3. เตรียมข้อมูลสำหรับหน้าพิมพ์ A4 (Official Transcript)
+  populateOfficialTranscript(student, meta, allDisplayCourses, totalCredits, weightedGpa, cumCredits);
+
+  document.getElementById("screen-search").classList.add("hidden");
+  document.getElementById("screen-profile").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function populateOfficialTranscript(student, meta, courses, termCredits, termGpa, cumCredits) {
+  document.getElementById("prStudentId").textContent = student.id;
+  document.getElementById("prGroupCode").textContent = meta.groupCode;
+  document.getElementById("prYearLevel").textContent = meta.yearLevelStr;
+  document.getElementById("prFullName").textContent = student.name;
+  document.getElementById("prShortGroup").textContent = meta.shortGroup;
+
+  document.getElementById("prTermCredits").textContent = termCredits;
+  document.getElementById("prTermGpa").textContent = termGpa;
+  document.getElementById("prCumCredits").textContent = cumCredits;
+  document.getElementById("prCumGpa").textContent = termGpa;
+
+  const prBody = document.getElementById("prCourseListBody");
+  prBody.innerHTML = courses.map(c => `
+    <tr class="leading-[1.55]">
+      <td class="py-[1.5px] pl-2 font-normal">${c.code}</td>
+      <td class="py-[1.5px] pl-2 font-normal">${c.name}</td>
+      <td class="py-[1.5px] text-center font-normal">${c.creditStr}</td>
+      <td class="py-[1.5px] text-center font-normal">${c.gradeStr}</td>
+    </tr>
+  `).join("");
+
+  updatePrintTimestamp();
+}
+
+function updatePrintTimestamp() {
+  const now = new Date();
+  const dd = String(now.getDate()).padStart(2, "0");
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const yyyy = now.getFullYear() + 543;
+  const hh = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+  const ss = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("prFooterDateTime").textContent = `${dd}/${mm}/${yyyy} - ${hh}:${min}:${ss}`;
+}
+
+function triggerOfficialPrint() {
+  updatePrintTimestamp();
+  window.print();
+}
+
+function logoutToSearch() {
+  document.getElementById("screen-profile").classList.add("hidden");
+  document.getElementById("screen-search").classList.remove("hidden");
+  document.getElementById("searchKeyInput").value = "";
+}
+
+initDatabase();
+</script>
+</body>
+</html>
