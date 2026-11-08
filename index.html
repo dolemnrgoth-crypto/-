@@ -35,72 +35,114 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* พื้นหลัง Mesh Gradient นุ่มนวลมีมิติ */
     .ios-mesh-bg {
       position: fixed;
       inset: 0;
       z-index: -1;
       background:
-        radial-gradient(at 10% 10%, rgba(0, 122, 255, 0.09) 0px, transparent 55%),
-        radial-gradient(at 90% 15%, rgba(88, 86, 214, 0.08) 0px, transparent 55%),
-        radial-gradient(at 50% 90%, rgba(52, 199, 89, 0.06) 0px, transparent 60%),
-        #F2F2F7;
+        radial-gradient(at 12% 12%, rgba(0, 122, 255, 0.14) 0px, transparent 50%),
+        radial-gradient(at 88% 15%, rgba(79, 70, 229, 0.12) 0px, transparent 52%),
+        radial-gradient(at 50% 88%, rgba(52, 199, 89, 0.08) 0px, transparent 58%),
+        #F2F4F8;
     }
+
+    /* Glassmorphism การ์ดหลัก */
     .ios-glass {
-      background: rgba(255, 255, 255, 0.80);
+      background: rgba(255, 255, 255, 0.84);
       backdrop-filter: blur(28px) saturate(190%);
       -webkit-backdrop-filter: blur(28px) saturate(190%);
-      border: 1px solid rgba(255, 255, 255, 0.88);
-      box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.03);
     }
+
     .ios-card {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       border: 1px solid rgba(255, 255, 255, 0.98);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.035);
+      box-shadow: 0 8px 28px -4px rgba(15, 23, 42, 0.05), 0 2px 6px rgba(15, 23, 42, 0.02);
     }
+
+    /* Hero GPA Card แบบไล่เฉดสีพรีเมียม */
+    .gpa-hero-card {
+      background: linear-gradient(135deg, #0055FF 0%, #007AFF 48%, #4F46E5 100%);
+      box-shadow: 0 16px 36px -6px rgba(0, 102, 255, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .gpa-hero-card::before {
+      content: "";
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 240px;
+      height: 240px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ช่องกรอกข้อมูล */
     .ios-input {
       font-size: 16px !important;
-      background: rgba(118, 118, 128, 0.09);
-      border: 1px solid transparent;
+      background: rgba(118, 118, 128, 0.08);
+      border: 1.5px solid transparent;
       transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .ios-input:focus {
       background: #FFFFFF;
-      border-color: rgba(0, 122, 255, 0.45);
-      box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.12);
+      border-color: rgba(0, 122, 255, 0.55);
+      box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.14);
     }
+
+    /* ปุ่มหลักพร้อมเอฟเฟกต์เงา */
     .ios-btn-primary {
-      background: #007AFF;
+      background: linear-gradient(135deg, #007AFF 0%, #0055EE 100%);
       color: #FFFFFF;
-      box-shadow: 0 6px 20px -4px rgba(0, 122, 255, 0.38);
+      box-shadow: 0 8px 22px -4px rgba(0, 122, 255, 0.45);
       transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    .ios-btn-primary:hover { background: #006EE6; }
-    .ios-btn-primary:active { transform: scale(0.97); }
+    .ios-btn-primary:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+    .ios-btn-primary:active {
+      transform: scale(0.97);
+    }
 
+    /* ปุ่มกดตัวเลข PIN */
     .ios-numpad-btn {
       width: 4.4rem;
       height: 4.4rem;
       border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.035);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: transform 0.1s ease, background-color 0.15s ease;
+      transition: transform 0.12s ease, background-color 0.15s ease;
       user-select: none;
     }
     .ios-numpad-btn:active {
-      background: rgba(209, 209, 214, 0.75);
-      transform: scale(0.92);
+      background: rgba(209, 209, 214, 0.8);
+      transform: scale(0.91);
     }
 
+    /* แอนิเมชันวงแหวน GPA */
+    .gpa-ring-circle {
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+
+    /* แอนิเมชันเข้าหน้าเว็บ */
     .ios-spring-enter {
-      animation: iosSpring 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: iosSpring 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
     @keyframes iosSpring {
-      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     @keyframes iosSheetUp {
@@ -164,24 +206,37 @@
   <!-- ===================================================================== -->
   <!-- หน้าที่ 1: หน้าจอค้นหาตัวตน (รองรับทั้งมือถือและคอมพิวเตอร์)               -->
   <!-- ===================================================================== -->
-  <main id="screen-search" class="min-h-[100dvh] flex flex-col justify-center items-center px-4 py-8">
-    <div class="w-full max-w-[390px] ios-spring-enter">
+  <main id="screen-search" class="min-h-[100dvh] flex flex-col justify-between items-center px-4 py-8">
+    <div class="w-full"></div>
+
+    <div class="w-full max-w-[400px] ios-spring-enter my-auto">
 
       <div class="text-center mb-6">
-        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-[24px] bg-white p-2.5 flex items-center justify-center mx-auto mb-3.5 shadow-[0_10px_28px_rgba(0,0,0,0.06)] border border-white">
-          <img
-            src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
-            alt="โลโก้ สกร.นม"
-            class="w-full h-full object-contain"
-          >
+        <!-- โลโก้พร้อม Ambient Glow -->
+        <div class="relative inline-block mb-4">
+          <div class="absolute -inset-2.5 rounded-[30px] bg-gradient-to-tr from-[#007AFF]/30 via-[#5856D6]/25 to-[#34C759]/25 blur-xl opacity-80"></div>
+          <div class="relative w-22 h-22 sm:w-24 sm:h-24 rounded-[26px] bg-white p-2.5 flex items-center justify-center mx-auto shadow-[0_12px_32px_rgba(0,122,255,0.14)] border border-white">
+            <img
+              src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
+              alt="โลโก้ สกร.นม"
+              class="w-16 h-16 sm:w-20 sm:h-20 object-contain"
+            >
+          </div>
         </div>
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/85 text-[#007AFF] text-[11px] font-semibold shadow-sm border border-white mb-2">
-          <span>🔒 ข้อมูลส่วนบุคคล • ยืนยันด้วย PIN</span>
+
+        <!-- ป้ายสถานะออนไลน์พร้อมจุดกระพริบ -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 text-[#1C1C1E] text-[11px] font-semibold shadow-sm border border-white mb-2.5">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#34C759] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#34C759]"></span>
+          </span>
+          <span>ระบบออนไลน์พร้อมใช้งาน • ยืนยันด้วย PIN</span>
         </div>
-        <h1 class="text-[22px] sm:text-2xl font-bold text-[#1C1C1E] tracking-tight">
-          ตรวจสอบผลการเรียน
+
+        <h1 class="text-[23px] sm:text-[26px] font-extrabold text-[#1C1C1E] tracking-tight">
+          ระบบรายงานผลการศึกษา
         </h1>
-        <p class="text-[13px] font-medium text-[#3A3A3C] mt-0.5">
+        <p class="text-[13px] font-semibold text-[#3A3A3C] mt-0.5">
           ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอเมืองนครราชสีมา
         </p>
         <p class="text-xs text-[#8E8E93] mt-0.5">
@@ -189,10 +244,10 @@
         </p>
       </div>
 
-      <div class="ios-glass rounded-[30px] p-5 sm:p-7">
+      <div class="ios-glass rounded-[32px] p-5 sm:p-7">
         <form onsubmit="initiateSearch(event)" class="space-y-4">
           <div>
-            <label class="block text-xs font-semibold text-[#8E8E93] mb-1.5 pl-1">
+            <label class="block text-xs font-bold text-[#3A3A3C] mb-1.5 pl-1">
               รหัสประจำตัวนักศึกษา หรือ ชื่อ-นามสกุล
             </label>
             <div class="relative">
@@ -202,44 +257,52 @@
                 required
                 autocomplete="off"
                 placeholder="เช่น 69130491101 หรือ กฤศกร"
-                class="ios-input w-full pl-10 pr-4 py-3.5 rounded-2xl focus:outline-none font-medium text-[#1C1C1E] placeholder:text-[#8E8E93] placeholder:font-normal"
+                class="ios-input w-full pl-11 pr-4 py-3.5 rounded-2xl focus:outline-none font-semibold text-[#1C1C1E] placeholder:text-[#8E8E93] placeholder:font-normal"
               >
-              <svg class="w-4 h-4 text-[#8E8E93] absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-[#007AFF] absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z"/>
               </svg>
             </div>
           </div>
 
-          <div id="searchErrorBox" class="hidden px-3.5 py-2.5 rounded-2xl bg-[#FF3B30]/10 text-[#FF3B30] text-xs font-medium flex items-center gap-2">
+          <div id="searchErrorBox" class="hidden px-3.5 py-2.5 rounded-2xl bg-[#FF3B30]/10 border border-[#FF3B30]/20 text-[#FF3B30] text-xs font-semibold flex items-center gap-2">
             <span>⚠️</span>
-            <span>ไม่พบข้อมูลนักศึกษา กรุณาตรวจสอบอีกครั้ง</span>
+            <span>ไม่พบข้อมูลนักศึกษา กรุณาตรวจสอบรหัสหรือชื่ออีกครั้ง</span>
           </div>
 
           <button
             type="submit"
-            class="ios-btn-primary w-full font-semibold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-1.5 text-[15px]"
+            class="ios-btn-primary w-full font-bold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 text-[15px]"
           >
-            <span>ค้นหาข้อมูล</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <span>ตรวจสอบผลการเรียน</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
             </svg>
           </button>
         </form>
 
-        <div class="mt-5 pt-4 border-t border-black/[0.06] text-center">
+        <div class="mt-5 pt-4 border-t border-black/[0.06] flex items-center justify-center gap-2 text-center">
+          <span class="w-5 h-5 rounded-full bg-[#007AFF]/10 text-[#007AFF] flex items-center justify-center text-[11px] font-bold">🔑</span>
           <p class="text-xs text-[#8E8E93]">
-            รหัส PIN ใช้ <span class="text-[#1C1C1E] font-semibold">เลข 4 ตัวท้ายของรหัสนักศึกษา</span>
+            รหัส PIN ใช้ <span class="text-[#1C1C1E] font-bold">เลข 4 ตัวท้ายของรหัสนักศึกษา</span>
           </p>
         </div>
       </div>
 
     </div>
+
+    <!-- เครดิตผู้จัดทำหน้าแรก -->
+    <footer class="w-full text-center pt-6 pb-2 no-print">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-sm text-xs text-[#636366] font-medium">
+        <span>✨ จัดทำโดย : <strong class="text-[#1C1C1E] font-semibold">ปัณณธร บุญเมธาภัทร</strong></span>
+      </div>
+    </footer>
   </main>
 
   <!-- ===================================================================== -->
   <!-- หน้าต่างยืนยันรหัสผ่าน 4 หลัก (Bottom Sheet บนมือถือ / Modal บนคอม)       -->
   <!-- ===================================================================== -->
-  <div id="modal-pin" class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center bg-black/30 backdrop-blur-md sm:p-4">
+  <div id="modal-pin" class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center bg-black/35 backdrop-blur-md sm:p-4">
     <div id="pinModalCard" class="ios-glass rounded-t-[34px] sm:rounded-[36px] px-6 pt-4 pb-8 sm:py-7 w-full max-w-[380px] text-center relative sheet-enter pb-safe">
 
       <div class="w-10 h-1.5 bg-black/15 rounded-full mx-auto mb-3 sm:hidden"></div>
@@ -251,7 +314,7 @@
         ✕
       </button>
 
-      <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white p-1.5 flex items-center justify-center mx-auto mb-2.5 shadow-sm border border-black/[0.04]">
+      <div class="w-14 h-14 rounded-2xl bg-white p-2 flex items-center justify-center mx-auto mb-2.5 shadow-sm border border-black/[0.05]">
         <img
           src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
           alt="โลโก้ สกร.นม"
@@ -259,8 +322,8 @@
         >
       </div>
 
-      <h3 class="text-base font-bold text-[#1C1C1E]">ป้อนรหัส PIN 4 หลัก</h3>
-      <p id="pinTargetName" class="text-xs font-semibold text-[#007AFF] mt-0.5 truncate px-4"></p>
+      <h3 class="text-base font-extrabold text-[#1C1C1E]">ยืนยันรหัส PIN 4 หลัก</h3>
+      <p id="pinTargetName" class="text-xs font-bold text-[#007AFF] mt-0.5 truncate px-4"></p>
       <p class="text-[11px] text-[#8E8E93] mt-0.5">กดเลข 4 ตัวท้ายของรหัสประจำตัวนักศึกษา</p>
 
       <div id="pinDotsContainer" class="flex justify-center gap-4 my-5">
@@ -296,138 +359,193 @@
   <!-- ===================================================================== -->
   <section id="screen-profile" class="hidden min-h-[100dvh] pb-28 sm:pb-16 no-print">
 
-    <nav class="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-black/[0.06]">
+    <!-- แถบเมนูด้านบน -->
+    <nav class="sticky top-0 z-30 bg-white/85 backdrop-blur-xl border-b border-black/[0.06]">
       <div class="max-w-4xl mx-auto px-3.5 sm:px-4 py-3 flex items-center justify-between gap-2">
         <button
           onclick="logoutToSearch()"
-          class="inline-flex items-center gap-0.5 text-[#007AFF] active:opacity-60 font-semibold text-sm transition shrink-0"
+          class="inline-flex items-center gap-1 text-[#007AFF] active:opacity-60 font-bold text-sm transition shrink-0"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
           </svg>
-          <span>กลับ</span>
+          <span>ค้นหาใหม่</span>
         </button>
 
-        <div class="flex items-center gap-1.5 min-w-0">
+        <div class="flex items-center gap-2 min-w-0">
           <img
             src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
             alt="โลโก้ สกร.นม"
-            class="w-5 h-5 sm:w-6 sm:h-6 object-contain shrink-0"
+            class="w-6 h-6 object-contain shrink-0"
           >
-          <span class="text-xs sm:text-sm font-bold text-[#1C1C1E] truncate">รายงานผลการศึกษา</span>
+          <span class="text-xs sm:text-sm font-extrabold text-[#1C1C1E] truncate">รายงานผลการศึกษา</span>
         </div>
 
         <button
           onclick="triggerOfficialPrint()"
-          class="px-3 sm:px-4 py-1.5 rounded-full bg-[#007AFF] active:bg-[#006EE6] text-white text-xs font-semibold shadow-sm transition flex items-center gap-1 shrink-0"
+          class="px-3.5 sm:px-4 py-1.5 rounded-full ios-btn-primary text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5 shrink-0"
         >
           <span>🖨️</span>
-          <span class="hidden sm:inline">พิมพ์รายงานผล (A4)</span>
-          <span class="sm:hidden">พิมพ์</span>
+          <span class="hidden sm:inline">พิมพ์ใบรายงานผล (A4)</span>
+          <span class="sm:hidden">พิมพ์ A4</span>
         </button>
       </div>
     </nav>
 
     <div class="max-w-4xl mx-auto px-3.5 sm:px-4 mt-4 sm:mt-6 ios-spring-enter space-y-4 sm:space-y-5">
 
-      <!-- Bento Grid: ข้อมูลนักศึกษา + เกรดเฉลี่ย -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-4">
+      <!-- Bento Grid: ข้อมูลนักศึกษา + การ์ด Hero GPA -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
 
         <!-- การ์ดข้อมูลนักศึกษา -->
-        <div class="md:col-span-7 ios-card rounded-[24px] sm:rounded-[28px] p-4 sm:p-6 flex flex-col justify-between">
-          <div class="flex items-center gap-3.5">
-            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[18px] bg-[#F2F2F7] p-2 flex items-center justify-center shrink-0 border border-black/[0.04]">
-              <img
-                src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
-                alt="โลโก้ สกร.นม"
-                class="w-full h-full object-contain"
-              >
-            </div>
-            <div class="min-w-0 flex-1">
-              <div class="flex flex-wrap items-center gap-1.5 mb-1">
-                <span id="pStatusBadge" class="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold"></span>
-                <span id="pPlanBadge" class="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[#007AFF]/10 text-[#007AFF]"></span>
+        <div class="md:col-span-7 ios-card rounded-[26px] sm:rounded-[30px] p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full bg-[#007AFF]/[0.04] pointer-events-none"></div>
+
+          <div>
+            <div class="flex items-start gap-3.5 sm:gap-4">
+              <div class="w-15 h-15 sm:w-16 sm:h-16 rounded-[20px] bg-gradient-to-br from-[#F2F2F7] to-white p-2 flex items-center justify-center shrink-0 border border-black/[0.06] shadow-sm">
+                <img
+                  src="https://s.imgz.io/2026/10/20/logo-.cf2ad3a10d1f38c3.png"
+                  alt="โลโก้ สกร.นม"
+                  class="w-11 h-11 sm:w-12 sm:h-12 object-contain"
+                >
               </div>
-              <h2 id="pFullName" class="text-lg sm:text-2xl font-bold text-[#1C1C1E] leading-snug break-words"></h2>
-              <p class="text-[11px] sm:text-xs text-[#8E8E93] mt-0.5">สาขาวิชาคอมพิวเตอร์ธุรกิจ • พาณิชยกรรม</p>
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-1.5 mb-1.5">
+                  <span id="pStatusBadge" class="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold"></span>
+                  <span id="pPlanBadge" class="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#007AFF]/10 text-[#007AFF]"></span>
+                </div>
+                <h2 id="pFullName" class="text-xl sm:text-2xl font-extrabold text-[#1C1C1E] leading-snug break-words"></h2>
+                <p class="text-xs text-[#636366] font-medium mt-0.5">สาขาวิชาคอมพิวเตอร์ธุรกิจ • ประเภทวิชาพาณิชยกรรม</p>
+              </div>
+            </div>
+
+            <!-- หลอดความก้าวหน้าหน่วยกิตประจำภาค -->
+            <div class="mt-4 pt-3.5 border-t border-black/[0.05]">
+              <div class="flex items-center justify-between text-xs mb-1.5">
+                <span class="font-semibold text-[#636366]">ความก้าวหน้าหน่วยกิตประจำภาคเรียน</span>
+                <span id="pCreditProgressText" class="font-bold text-[#007AFF]"></span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-[#F2F2F7] overflow-hidden">
+                <div id="pCreditProgressBar" class="h-full rounded-full bg-gradient-to-r from-[#007AFF] to-[#34C759] transition-all duration-1000" style="width: 0%"></div>
+              </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-3 gap-2 mt-4 pt-3.5 border-t border-black/[0.05]">
-            <div class="bg-[#F2F2F7]/85 rounded-2xl p-2.5 sm:p-3">
-              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] block">รหัสนักศึกษา</span>
-              <span id="pStudentId" class="font-mono font-bold text-[#1C1C1E] text-[11px] sm:text-sm mt-0.5 block break-all"></span>
+          <div class="grid grid-cols-3 gap-2.5 mt-4 pt-3.5 border-t border-black/[0.05]">
+            <div class="bg-[#F2F4F8] rounded-2xl p-2.5 sm:p-3 border border-black/[0.02]">
+              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] font-medium block">รหัสนักศึกษา</span>
+              <span id="pStudentId" class="font-mono font-extrabold text-[#1C1C1E] text-xs sm:text-sm mt-0.5 block break-all"></span>
             </div>
-            <div class="bg-[#F2F2F7]/85 rounded-2xl p-2.5 sm:p-3">
-              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] block">ชั้นปี / กลุ่ม</span>
-              <span id="pClassGroup" class="font-bold text-[#007AFF] text-[11px] sm:text-sm mt-0.5 block"></span>
+            <div class="bg-[#F2F4F8] rounded-2xl p-2.5 sm:p-3 border border-black/[0.02]">
+              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] font-medium block">ชั้นปี / กลุ่ม</span>
+              <span id="pClassGroup" class="font-extrabold text-[#007AFF] text-xs sm:text-sm mt-0.5 block"></span>
             </div>
-            <div class="bg-[#F2F2F7]/85 rounded-2xl p-2.5 sm:p-3">
-              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] block">ภาคเรียน</span>
-              <span class="font-bold text-[#1C1C1E] text-[11px] sm:text-sm mt-0.5 block">1 / 2569</span>
+            <div class="bg-[#F2F4F8] rounded-2xl p-2.5 sm:p-3 border border-black/[0.02]">
+              <span class="text-[10px] sm:text-[11px] text-[#8E8E93] font-medium block">ภาคเรียนที่</span>
+              <span class="font-extrabold text-[#1C1C1E] text-xs sm:text-sm mt-0.5 block">1 / 2569</span>
             </div>
           </div>
         </div>
 
-        <!-- การ์ด Widget GPA & GPAX -->
-        <div class="md:col-span-5 ios-card rounded-[24px] sm:rounded-[28px] p-4 sm:p-6 flex flex-col justify-between">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-[#8E8E93]">เกรดเฉลี่ยประจำภาค (GPA)</span>
-            <span id="pTermCreditsBadge" class="px-2.5 py-0.5 rounded-full bg-[#007AFF]/10 text-[#007AFF] text-[11px] font-semibold"></span>
-          </div>
-
-          <div class="my-2.5 sm:my-3 flex items-center justify-between">
+        <!-- การ์ด Hero Widget: เกรดเฉลี่ยประจำภาค (GPA) พร้อมวงแหวนกราฟิก (ไม่มี GPAX) -->
+        <div class="md:col-span-5 gpa-hero-card rounded-[26px] sm:rounded-[30px] p-5 sm:p-6 text-white flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 relative z-10">
             <div>
-              <div id="pGpaValue" class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1C1C1E]"></div>
-              <div id="pAvgScore" class="text-[11px] sm:text-xs text-[#8E8E93] mt-0.5"></div>
+              <span class="text-xs font-bold text-white/85 uppercase tracking-wider block">ผลการเรียนประจำภาค</span>
+              <span id="pHonorBadge" class="inline-flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-bold text-white"></span>
             </div>
-            <div class="text-right">
-              <div id="pCumCreditsMobile" class="text-[11px] font-semibold text-[#3A3A3C]"></div>
+            <span id="pTermCreditsBadge" class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold shrink-0"></span>
+          </div>
+
+          <!-- ส่วนแสดงตัวเลข GPA คู่กับวงแหวน SVG -->
+          <div class="my-4 flex items-center justify-between gap-4 relative z-10">
+            <div>
+              <div class="text-[11px] font-medium text-white/75 mb-0.5">เกรดเฉลี่ยประจำภาค (GPA)</div>
+              <div id="pGpaValue" class="text-5xl sm:text-[54px] font-extrabold tracking-tight text-white leading-none drop-shadow-sm">0.00</div>
+              <div class="flex flex-wrap items-center gap-2 mt-2">
+                <span id="pAvgScore" class="text-xs text-white/90 font-medium"></span>
+                <span class="text-white/40">•</span>
+                <span id="pCumCreditsMobile" class="text-xs font-bold text-white bg-black/15 px-2.5 py-0.5 rounded-full"></span>
+              </div>
+            </div>
+
+            <!-- วงแหวน SVG แสดงสัดส่วน GPA เต็ม 4.00 -->
+            <div class="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 flex items-center justify-center">
+              <svg class="w-full h-full" viewBox="0 0 100 100">
+                <circle
+                  cx="50" cy="50" r="40"
+                  fill="transparent"
+                  stroke="rgba(255, 255, 255, 0.2)"
+                  stroke-width="9"
+                />
+                <circle
+                  id="pGpaRingCircle"
+                  class="gpa-ring-circle"
+                  cx="50" cy="50" r="40"
+                  fill="transparent"
+                  stroke="#FFFFFF"
+                  stroke-width="9"
+                  stroke-linecap="round"
+                  stroke-dasharray="251.32"
+                  stroke-dashoffset="251.32"
+                />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span id="pGpaPercentText" class="text-sm sm:text-base font-extrabold text-white leading-none">0%</span>
+                <span class="text-[9px] text-white/75 font-medium mt-0.5">จาก 4.00</span>
+              </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-3 gap-2 pt-3 border-t border-black/[0.05] text-center">
-            <div class="bg-[#F2F2F7]/85 rounded-2xl py-2 px-1">
-              <span class="text-[10px] text-[#8E8E93] block">ลงทะเบียน</span>
-              <span id="pCountTotal" class="font-bold text-xs sm:text-sm text-[#1C1C1E]"></span>
+          <!-- สรุปจำนวนวิชา -->
+          <div class="grid grid-cols-3 gap-2 pt-3.5 border-t border-white/20 text-center relative z-10">
+            <div class="bg-white/15 backdrop-blur-sm rounded-2xl py-2 px-1">
+              <span class="text-[10px] text-white/80 block">ลงทะเบียน</span>
+              <span id="pCountTotal" class="font-extrabold text-xs sm:text-sm text-white"></span>
             </div>
-            <div class="bg-[#34C759]/10 rounded-2xl py-2 px-1">
-              <span class="text-[10px] text-[#248A3D] block">สอบผ่าน</span>
-              <span id="pCountPass" class="font-bold text-xs sm:text-sm text-[#248A3D]"></span>
+            <div class="bg-[#34C759]/30 backdrop-blur-sm border border-white/20 rounded-2xl py-2 px-1">
+              <span class="text-[10px] text-white/90 block">สอบผ่าน</span>
+              <span id="pCountPass" class="font-extrabold text-xs sm:text-sm text-white"></span>
             </div>
-            <div class="bg-[#FF3B30]/10 rounded-2xl py-2 px-1">
-              <span class="text-[10px] text-[#D70015] block">ติด 0 / รอผล</span>
-              <span id="pCountFail" class="font-bold text-xs sm:text-sm text-[#D70015]"></span>
+            <div class="bg-[#FF3B30]/35 backdrop-blur-sm border border-white/20 rounded-2xl py-2 px-1">
+              <span class="text-[10px] text-white/90 block">ติด 0 / รอผล</span>
+              <span id="pCountFail" class="font-extrabold text-xs sm:text-sm text-white"></span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- ส่วนแสดงรายวิชา -->
-      <div class="ios-card rounded-[24px] sm:rounded-[28px] overflow-hidden">
-        <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-black/[0.05] flex items-center justify-between gap-2">
-          <div>
-            <h3 class="font-bold text-[#1C1C1E] text-sm sm:text-[15px]">รายวิชาประจำภาคเรียนที่ 1/2569</h3>
-            <p class="text-[11px] sm:text-xs text-[#8E8E93]">แสดงรหัสวิชา หน่วยกิต (ท-ป-น) แต้มคูณหน่วยกิต และผลการเรียน</p>
+      <div class="ios-card rounded-[26px] sm:rounded-[30px] overflow-hidden">
+        <div class="px-4 sm:px-6 py-4 border-b border-black/[0.05] flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-white to-[#F2F4F8]/60">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-[#007AFF]/10 text-[#007AFF] flex items-center justify-center text-base font-bold">
+              📚
+            </div>
+            <div>
+              <h3 class="font-extrabold text-[#1C1C1E] text-sm sm:text-base">ผลการเรียนรายวิชา ประจำภาคเรียนที่ 1/2569</h3>
+              <p class="text-[11px] sm:text-xs text-[#8E8E93]">แสดงรหัสวิชา หน่วยกิต (ท-ป-น) แต้มคะแนน และระดับผลการเรียน</p>
+            </div>
           </div>
-          <span class="text-[11px] font-semibold text-[#007AFF] bg-[#007AFF]/10 px-2.5 py-1 rounded-full shrink-0">
-            ปวช.
+          <span class="text-xs font-bold text-[#007AFF] bg-[#007AFF]/10 px-3 py-1 rounded-full shrink-0">
+            หลักสูตร ปวช.
           </span>
         </div>
 
-        <!-- 1. มุมมองสำหรับมือถือ -->
+        <!-- 1. มุมมองสำหรับมือถือ (พร้อมแถบสีด้านซ้ายแยกตามเกรด) -->
         <div id="pMobileSubjectList" class="sm:hidden divide-y divide-black/[0.05]"></div>
 
         <!-- 2. มุมมองสำหรับจอแท็บเล็ตและคอมพิวเตอร์ -->
         <div class="hidden sm:block overflow-x-auto">
           <table class="w-full text-sm text-left">
-            <thead class="bg-[#F2F2F7]/70 text-[#8E8E93] text-[11px] font-semibold uppercase border-b border-black/[0.05]">
+            <thead class="bg-[#F2F4F8] text-[#636366] text-[11px] font-bold uppercase border-b border-black/[0.05]">
               <tr>
-                <th class="py-3 px-4 w-28">รหัสวิชา</th>
-                <th class="py-3 px-4">ชื่อวิชา</th>
-                <th class="py-3 px-4 w-28 text-center">หน่วยกิต</th>
-                <th class="py-3 px-4 w-28 text-center">แต้มคะแนน</th>
-                <th class="py-3 px-4 w-24 text-center">เกรด</th>
+                <th class="py-3.5 px-5 w-32">รหัสวิชา</th>
+                <th class="py-3.5 px-4">ชื่อรายวิชา</th>
+                <th class="py-3.5 px-4 w-32 text-center">หน่วยกิต (ท-ป-น)</th>
+                <th class="py-3.5 px-4 w-32 text-center">แต้มคะแนน</th>
+                <th class="py-3.5 px-5 w-28 text-center">ผลการเรียน</th>
               </tr>
             </thead>
             <tbody id="pSubjectTableBody" class="divide-y divide-black/[0.04]"></tbody>
@@ -435,19 +553,26 @@
         </div>
       </div>
 
+      <!-- เครดิตผู้จัดทำในหน้าโปรไฟล์ -->
+      <div class="text-center pt-2 pb-4">
+        <p class="text-xs text-[#8E8E93] font-medium">
+          ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอเมืองนครราชสีมา • จัดทำโดย : <span class="text-[#3A3A3C] font-semibold">ปัณณธร บุญเมธาภัทร</span>
+        </p>
+      </div>
+
     </div>
 
     <!-- แถบปุ่มลอยด้านล่างสำหรับมือถือ -->
-    <div class="sm:hidden fixed bottom-0 inset-x-0 z-30 bg-white/85 backdrop-blur-xl border-t border-black/[0.06] px-4 pt-2.5 pb-safe flex items-center gap-2.5">
+    <div class="sm:hidden fixed bottom-0 inset-x-0 z-30 bg-white/90 backdrop-blur-xl border-t border-black/[0.06] px-4 pt-2.5 pb-safe flex items-center gap-2.5">
       <button
         onclick="logoutToSearch()"
-        class="px-4 py-3 rounded-2xl bg-[#F2F2F7] active:bg-[#E5E5EA] text-[#1C1C1E] font-semibold text-xs shrink-0"
+        class="px-4 py-3 rounded-2xl bg-[#F2F2F7] active:bg-[#E5E5EA] text-[#1C1C1E] font-bold text-xs shrink-0"
       >
         ค้นหาใหม่
       </button>
       <button
         onclick="triggerOfficialPrint()"
-        class="flex-1 ios-btn-primary py-3 px-4 rounded-2xl font-semibold text-xs flex items-center justify-center gap-1.5"
+        class="flex-1 ios-btn-primary py-3 px-4 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5"
       >
         <span>🖨️ พิมพ์ใบรายงานผลการศึกษา (A4)</span>
       </button>
@@ -1073,6 +1198,7 @@ const studentsMap = {};
 let pendingStudent = null;
 let activeStudent = null;
 let currentPin = "";
+let gpaAnimFrame = null;
 
 function initDatabase() {
   const lines = RAW_RECORDS.trim().split("\n");
@@ -1266,18 +1392,77 @@ document.addEventListener("keydown", function(e) {
 });
 
 // ============================================================================
-// 4. แสดงผลหน้าโปรไฟล์บนมือถือ/คอม & เตรียมใบรายงานผลการศึกษา A4
+// 4. แสดงผลหน้าโปรไฟล์บนมือถือ/คอม & แอนิเมชัน GPA Ring
 // ============================================================================
 function formatGradeBadge(g) {
   if (g === null || g === undefined) {
-    return `<span class="px-3 py-1 rounded-full bg-[#F2F2F7] text-[#8E8E93] font-semibold text-xs">รอผล</span>`;
+    return `<span class="px-3.5 py-1 rounded-full bg-[#F2F2F7] text-[#8E8E93] font-bold text-xs">รอผล</span>`;
   }
-  if (g === 4) return `<span class="px-3 py-1 rounded-full bg-[#34C759]/15 text-[#248A3D] font-bold text-xs">4.0</span>`;
-  if (g === 3.5) return `<span class="px-3 py-1 rounded-full bg-[#30B0C7]/15 text-[#0071A4] font-bold text-xs">3.5</span>`;
-  if (g === 3) return `<span class="px-3 py-1 rounded-full bg-[#007AFF]/12 text-[#007AFF] font-bold text-xs">3.0</span>`;
-  if (g >= 2) return `<span class="px-3 py-1 rounded-full bg-[#5856D6]/12 text-[#5856D6] font-bold text-xs">${g.toFixed(1)}</span>`;
-  if (g >= 1) return `<span class="px-3 py-1 rounded-full bg-[#FF9500]/15 text-[#C93400] font-bold text-xs">${g.toFixed(1)}</span>`;
-  return `<span class="px-3 py-1 rounded-full bg-[#FF3B30]/15 text-[#D70015] font-bold text-xs">0.0</span>`;
+  if (g === 4) return `<span class="px-3.5 py-1 rounded-full bg-[#34C759]/15 text-[#1E8E3E] font-extrabold text-xs shadow-2xs">4.0</span>`;
+  if (g === 3.5) return `<span class="px-3.5 py-1 rounded-full bg-[#30B0C7]/15 text-[#0071A4] font-extrabold text-xs">3.5</span>`;
+  if (g === 3) return `<span class="px-3.5 py-1 rounded-full bg-[#007AFF]/12 text-[#007AFF] font-extrabold text-xs">3.0</span>`;
+  if (g >= 2) return `<span class="px-3.5 py-1 rounded-full bg-[#5856D6]/12 text-[#5856D6] font-extrabold text-xs">${g.toFixed(1)}</span>`;
+  if (g >= 1) return `<span class="px-3.5 py-1 rounded-full bg-[#FF9500]/15 text-[#C93400] font-extrabold text-xs">${g.toFixed(1)}</span>`;
+  return `<span class="px-3.5 py-1 rounded-full bg-[#FF3B30]/15 text-[#D70015] font-extrabold text-xs">0.0</span>`;
+}
+
+function getMobileAccentBorderClass(course) {
+  if (course.isActivity) return "border-l-4 border-l-[#34C759]";
+  const g = course.grade;
+  if (g === 4) return "border-l-4 border-l-[#34C759]";
+  if (g >= 3) return "border-l-4 border-l-[#007AFF]";
+  if (g >= 2) return "border-l-4 border-l-[#5856D6]";
+  if (g >= 1) return "border-l-4 border-l-[#FF9500]";
+  return "border-l-4 border-l-[#FF3B30]";
+}
+
+function getHonorText(gpaNum) {
+  if (gpaNum >= 3.5) return "🌟 ผลการเรียนดีเยี่ยม";
+  if (gpaNum >= 3.0) return "👍 ผลการเรียนดีมาก";
+  if (gpaNum >= 2.5) return "✨ ผลการเรียนดี";
+  if (gpaNum >= 2.0) return "📘 ผ่านเกณฑ์มาตรฐาน";
+  return "💪 พยายามอีกนิด";
+}
+
+function animateGpaCounterAndRing(targetGpa) {
+  if (gpaAnimFrame) cancelAnimationFrame(gpaAnimFrame);
+
+  const gpaEl = document.getElementById("pGpaValue");
+  const ringEl = document.getElementById("pGpaRingCircle");
+  const percentEl = document.getElementById("pGpaPercentText");
+
+  const circumference = 251.32; // 2 * Math.PI * 40
+  const clampedGpa = Math.max(0, Math.min(4, targetGpa));
+  const targetRatio = clampedGpa / 4.0;
+  const targetOffset = circumference * (1 - targetRatio);
+
+  // ตั้งค่าเริ่มต้นก่อนเริ่มแอนิเมชัน
+  ringEl.style.strokeDashoffset = circumference;
+  setTimeout(() => {
+    ringEl.style.strokeDashoffset = targetOffset;
+  }, 60);
+
+  const duration = 950;
+  const startTime = performance.now();
+
+  function step(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // Cubic ease-out
+    const currentVal = clampedGpa * eased;
+    const currentPct = Math.round((currentVal / 4.0) * 100);
+
+    gpaEl.textContent = currentVal.toFixed(2);
+    percentEl.textContent = `${currentPct}%`;
+
+    if (progress < 1) {
+      gpaAnimFrame = requestAnimationFrame(step);
+    } else {
+      gpaEl.textContent = clampedGpa.toFixed(2);
+      percentEl.textContent = `${Math.round(targetRatio * 100)}%`;
+    }
+  }
+
+  gpaAnimFrame = requestAnimationFrame(step);
 }
 
 function navigateToProfileScreen(student) {
@@ -1287,52 +1472,65 @@ function navigateToProfileScreen(student) {
   const regularCourses = student.records.filter(r => !r.isActivity);
   const passCount = regularCourses.filter(r => r.grade !== null && r.grade > 0).length;
   const failCount = regularCourses.length - passCount;
+  const gpaNumeric = parseFloat(student.gpa) || 0;
 
   document.getElementById("pFullName").textContent = student.name;
   document.getElementById("pPlanBadge").textContent = student.planName;
   document.getElementById("pStudentId").textContent = student.id;
   document.getElementById("pClassGroup").textContent = `${meta.yearLevelStr} (${meta.shortGroup})`;
   document.getElementById("pTermCreditsBadge").textContent = `${student.termCreditsEarned}/${student.termCreditsReg} หน่วยกิต`;
+  document.getElementById("pHonorBadge").textContent = getHonorText(gpaNumeric);
   document.getElementById("pCumCreditsMobile").textContent = `สะสม ${student.cumCredits} หน่วยกิต`;
-  document.getElementById("pGpaValue").textContent = student.gpa;
-  document.getElementById("pAvgScore").textContent = `แต้มรวมภาคนี้ ${student.termPoints.toFixed(1)} แต้ม`;
+  document.getElementById("pAvgScore").textContent = `แต้มภาคนี้ ${student.termPoints.toFixed(1)}`;
   document.getElementById("pCountTotal").textContent = `${regularCourses.length} วิชา`;
   document.getElementById("pCountPass").textContent = `${passCount} วิชา`;
   document.getElementById("pCountFail").textContent = `${failCount} วิชา`;
 
+  // อัปเดตหลอดความก้าวหน้าหน่วยกิตประจำภาค
+  const creditPct = student.termCreditsReg > 0
+    ? Math.round((student.termCreditsEarned / student.termCreditsReg) * 100)
+    : 0;
+  document.getElementById("pCreditProgressText").textContent = `ผ่านแล้ว ${student.termCreditsEarned} จาก ${student.termCreditsReg} หน่วยกิต (${creditPct}%)`;
+  const creditBar = document.getElementById("pCreditProgressBar");
+  creditBar.style.width = "0%";
+  setTimeout(() => {
+    creditBar.style.width = `${creditPct}%`;
+  }, 80);
+
   const statusBadge = document.getElementById("pStatusBadge");
   if (failCount === 0 && regularCourses.length > 0) {
-    statusBadge.className = "px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[#34C759]/15 text-[#248A3D]";
+    statusBadge.className = "px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#34C759]/15 text-[#1E8E3E]";
     statusBadge.textContent = "กำลังศึกษา • ผ่านครบทุกวิชา";
   } else {
-    statusBadge.className = "px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[#FF9500]/15 text-[#C93400]";
+    statusBadge.className = "px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-[#FF9500]/15 text-[#C93400]";
     statusBadge.textContent = `มีวิชาติด 0 / รอผล (${failCount} วิชา)`;
   }
 
   const allDisplayCourses = [...student.records].sort((a, b) => a.code.localeCompare(b.code));
 
-  // 1. สร้างรายการการ์ดสำหรับหน้าจอมือถือ (Mobile View)
+  // 1. สร้างรายการการ์ดสำหรับหน้าจอมือถือ (Mobile View พร้อมแถบสีด้านซ้าย)
   const mobileList = document.getElementById("pMobileSubjectList");
   mobileList.innerHTML = allDisplayCourses.map(c => {
+    const accentBorder = getMobileAccentBorderClass(c);
     const scorePill = c.isActivity
-      ? `<span class="text-[11px] text-[#8E8E93]">วิชากิจกรรม (ไม่นับหน่วยกิต)</span>`
-      : `<span class="text-[11px] text-[#8E8E93]">แต้มคะแนน: <strong class="text-[#1C1C1E]">${(c.grade * c.credit).toFixed(1)}</strong> (${c.credit} นก.)</span>`;
+      ? `<span class="text-[11px] text-[#8E8E93] font-medium">วิชากิจกรรมบังคับ (ไม่นับหน่วยกิต)</span>`
+      : `<span class="text-[11px] text-[#636366]">แต้มคะแนน: <strong class="text-[#1C1C1E] font-bold">${(c.grade * c.credit).toFixed(1)}</strong> (${c.credit} นก.)</span>`;
     const gradeBadge = c.isActivity
-      ? `<span class="px-3 py-1 rounded-full bg-[#34C759]/15 text-[#248A3D] font-bold text-xs">${c.gradeStr}</span>`
+      ? `<span class="px-3.5 py-1 rounded-full bg-[#34C759]/15 text-[#1E8E3E] font-extrabold text-xs">${c.gradeStr}</span>`
       : formatGradeBadge(c.grade);
 
     return `
-      <div class="p-4 flex items-center justify-between gap-3 active:bg-[#F2F2F7]/70 transition">
+      <div class="p-4 pl-3.5 ${accentBorder} flex items-center justify-between gap-3 active:bg-[#F2F2F7]/70 transition">
         <div class="min-w-0 flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-mono text-[11px] font-semibold text-[#007AFF] bg-[#007AFF]/10 px-2 py-0.5 rounded-md">${c.code}</span>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-mono text-[11px] font-bold text-[#007AFF] bg-[#007AFF]/10 px-2 py-0.5 rounded-md">${c.code}</span>
             <span class="text-[11px] text-[#8E8E93] font-mono">หน่วยกิต ${c.creditStr}</span>
           </div>
-          <div class="font-bold text-[#1C1C1E] text-sm leading-snug break-words mt-1">${c.subject}</div>
+          <div class="font-bold text-[#1C1C1E] text-sm leading-snug break-words">${c.subject}</div>
           <div class="mt-1">${scorePill}</div>
         </div>
         <div class="shrink-0 text-right">
-          <div class="text-[10px] text-[#8E8E93] mb-1 text-center">เกรด</div>
+          <div class="text-[10px] text-[#8E8E93] font-semibold mb-1 text-center">เกรด</div>
           ${gradeBadge}
         </div>
       </div>
@@ -1343,19 +1541,19 @@ function navigateToProfileScreen(student) {
   const tbody = document.getElementById("pSubjectTableBody");
   tbody.innerHTML = allDisplayCourses.map(c => {
     const pointsDisplay = c.isActivity
-      ? `<span class="text-xs text-[#8E8E93]">กิจกรรม</span>`
-      : `${(c.grade * c.credit).toFixed(1)}`;
+      ? `<span class="text-xs font-medium text-[#8E8E93]">กิจกรรม</span>`
+      : `<span class="font-bold text-[#1C1C1E]">${(c.grade * c.credit).toFixed(1)}</span>`;
     const gradeBadge = c.isActivity
-      ? `<span class="px-3 py-1 rounded-full bg-[#34C759]/15 text-[#248A3D] font-bold text-xs">${c.gradeStr}</span>`
+      ? `<span class="px-3.5 py-1 rounded-full bg-[#34C759]/15 text-[#1E8E3E] font-extrabold text-xs">${c.gradeStr}</span>`
       : formatGradeBadge(c.grade);
 
     return `
-      <tr class="hover:bg-[#F2F2F7]/60 transition">
-        <td class="py-3.5 px-4 font-mono text-xs font-semibold text-[#3A3A3C]">${c.code}</td>
-        <td class="py-3.5 px-4 font-semibold text-[#1C1C1E]">${c.subject}</td>
-        <td class="py-3.5 px-4 text-center font-mono text-xs text-[#8E8E93]">${c.creditStr}</td>
-        <td class="py-3.5 px-4 text-center font-bold text-[#1C1C1E]">${pointsDisplay}</td>
-        <td class="py-3.5 px-4 text-center">${gradeBadge}</td>
+      <tr class="hover:bg-[#007AFF]/[0.03] transition">
+        <td class="py-3.5 px-5 font-mono text-xs font-bold text-[#007AFF]">${c.code}</td>
+        <td class="py-3.5 px-4 font-bold text-[#1C1C1E]">${c.subject}</td>
+        <td class="py-3.5 px-4 text-center font-mono text-xs text-[#636366]">${c.creditStr}</td>
+        <td class="py-3.5 px-4 text-center">${pointsDisplay}</td>
+        <td class="py-3.5 px-5 text-center">${gradeBadge}</td>
       </tr>
     `;
   }).join("");
@@ -1366,6 +1564,9 @@ function navigateToProfileScreen(student) {
   document.getElementById("screen-search").classList.add("hidden");
   document.getElementById("screen-profile").classList.remove("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // เรียกแอนิเมชันตัวเลข GPA และวงแหวนกราฟิก
+  animateGpaCounterAndRing(gpaNumeric);
 }
 
 function populateOfficialTranscript(student, meta, courses) {
