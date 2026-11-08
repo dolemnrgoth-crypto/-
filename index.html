@@ -294,7 +294,7 @@
     <!-- เครดิตผู้จัดทำหน้าแรก -->
     <footer class="w-full text-center pt-6 pb-2 no-print">
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-sm text-xs text-[#636366] font-medium">
-        <span>✨ จัดทำโดย : <strong class="text-[#1C1C1E] font-semibold">ปัณณธร บุญเมธาภัทร</strong></span>
+        <span>✨ จัดทำโดย : <strong class="text-[#1C1C1E] font-semibold">ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอเมืองนครราชสีมา</strong></span>
       </div>
     </footer>
   </main>
@@ -381,14 +381,17 @@
           <span class="text-xs sm:text-sm font-extrabold text-[#1C1C1E] truncate">รายงานผลการศึกษา</span>
         </div>
 
+        <!-- ปุ่มพิมพ์แสดงเฉพาะบนจอแท็บเล็ต/คอมพิวเตอร์ (sm ขึ้นไป) -->
         <button
           onclick="triggerOfficialPrint()"
-          class="px-3.5 sm:px-4 py-1.5 rounded-full ios-btn-primary text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5 shrink-0"
+          class="hidden sm:flex px-4 py-1.5 rounded-full ios-btn-primary text-white text-xs font-bold shadow-sm transition items-center gap-1.5 shrink-0"
         >
           <span>🖨️</span>
-          <span class="hidden sm:inline">พิมพ์ใบรายงานผล (A4)</span>
-          <span class="sm:hidden">พิมพ์ A4</span>
+          <span>พิมพ์ใบรายงานผล (A4)</span>
         </button>
+
+        <!-- Spacer สมดุลกึ่งกลางสำหรับหน้าจอมือถือ -->
+        <div class="w-[72px] sm:hidden shrink-0"></div>
       </div>
     </nav>
 
@@ -556,25 +559,22 @@
       <!-- เครดิตผู้จัดทำในหน้าโปรไฟล์ -->
       <div class="text-center pt-2 pb-4">
         <p class="text-xs text-[#8E8E93] font-medium">
-          ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอเมืองนครราชสีมา • จัดทำโดย : <span class="text-[#3A3A3C] font-semibold">ปัณณธร บุญเมธาภัทร</span>
+          จัดทำโดย : <span class="text-[#3A3A3C] font-semibold">ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอเมืองนครราชสีมา</span>
         </p>
       </div>
 
     </div>
 
-    <!-- แถบปุ่มลอยด้านล่างสำหรับมือถือ -->
-    <div class="sm:hidden fixed bottom-0 inset-x-0 z-30 bg-white/90 backdrop-blur-xl border-t border-black/[0.06] px-4 pt-2.5 pb-safe flex items-center gap-2.5">
+    <!-- แถบปุ่มลอยด้านล่างสำหรับมือถือ (ไม่มีปุ่มพิมพ์) -->
+    <div class="sm:hidden fixed bottom-0 inset-x-0 z-30 bg-white/90 backdrop-blur-xl border-t border-black/[0.06] px-4 pt-2.5 pb-safe flex items-center">
       <button
         onclick="logoutToSearch()"
-        class="px-4 py-3 rounded-2xl bg-[#F2F2F7] active:bg-[#E5E5EA] text-[#1C1C1E] font-bold text-xs shrink-0"
+        class="w-full ios-btn-primary py-3 px-4 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5"
       >
-        ค้นหาใหม่
-      </button>
-      <button
-        onclick="triggerOfficialPrint()"
-        class="flex-1 ios-btn-primary py-3 px-4 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5"
-      >
-        <span>🖨️ พิมพ์ใบรายงานผลการศึกษา (A4)</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z"/>
+        </svg>
+        <span>ค้นหาข้อมูลนักศึกษาท่านอื่น</span>
       </button>
     </div>
 
